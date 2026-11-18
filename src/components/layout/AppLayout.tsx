@@ -1,6 +1,8 @@
 import { Fish } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
 import { Link } from 'react-router'
+import { MainNavigation } from './MainNavigation.tsx'
+import { ScrollToTop } from './ScrollToTop.tsx'
 
 const MAIN_CONTENT_ID = 'conteudo-principal'
 
@@ -16,33 +18,48 @@ function skipToMainContent(event: MouseEvent<HTMLAnchorElement>) {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="flex min-h-dvh flex-col bg-slate-50 text-slate-900">
+    <div className="flex min-h-dvh flex-col">
+      <ScrollToTop />
+
+      {/* Quando focado, o link ocupa uma faixa própria no topo, sem cobrir o cabeçalho. */}
       <a
         href={`#${MAIN_CONTENT_ID}`}
         onClick={skipToMainContent}
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-10 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow"
+        className="sr-only focus:not-sr-only focus:block focus:bg-ink focus:px-4 focus:py-3 focus:text-white focus:underline focus:outline-2 focus:-outline-offset-4 focus:outline-brand-light"
       >
         Pular para o conteúdo
       </a>
 
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-4xl items-center px-4 py-3">
+      <header className="bg-brand text-white">
+        <div className="mx-auto flex max-w-6xl items-center px-4 py-3 sm:py-4">
           <Link
             to="/"
-            className="flex items-center gap-2 rounded text-lg font-bold text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+            className="flex items-center gap-3 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            <Fish aria-hidden="true" className="size-6 text-sky-700" />
-            Bagre Robô Maker
+            <Fish aria-hidden="true" className="size-8 shrink-0" />
+            <span className="flex flex-col leading-tight sm:flex-row sm:items-baseline sm:gap-2">
+              <span className="text-lg font-bold sm:text-xl">Bagre Robô Maker</span>
+              <span aria-hidden="true" className="hidden text-white/70 sm:inline">
+                —
+              </span>
+              <span className="text-sm text-white/90 sm:text-base">Plataforma Educacional</span>
+            </span>
           </Link>
         </div>
       </header>
 
-      <main id={MAIN_CONTENT_ID} tabIndex={-1} className="mx-auto w-full max-w-4xl flex-1 px-4 py-8 focus:outline-none">
+      <MainNavigation />
+
+      <main
+        id={MAIN_CONTENT_ID}
+        tabIndex={-1}
+        className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 focus:outline-none sm:py-8"
+      >
         {children}
       </main>
 
-      <footer className="border-t border-slate-200 bg-white">
-        <p className="mx-auto max-w-4xl px-4 py-4 text-sm text-slate-600">
+      <footer className="border-t border-line bg-white">
+        <p className="mx-auto max-w-6xl px-4 py-4 text-sm text-slate-600">
           Bagre Robô Maker — plataforma de apoio à aula guiada.
         </p>
       </footer>

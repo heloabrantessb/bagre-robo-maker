@@ -10,6 +10,7 @@
     "dev": "vite",
     "typecheck": "tsc -b",
     "lint": "eslint .",
+    "verify:modules": "node scripts/verify-modules.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
