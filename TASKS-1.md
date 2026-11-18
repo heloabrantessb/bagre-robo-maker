@@ -1,6 +1,6 @@
 # TASKS-1 — Estrutura inicial do projeto
 
-> **Status:** planejamento **aprovado** pelo responsável em 18/11/2026. Implementação em andamento na branch `feat/1-estrutura-inicial-do-projeto`.
+> **Status:** planejamento **aprovado** pelo responsável em 18/11/2026. Implementação **concluída e validada** na branch `feat/1-estrutura-inicial-do-projeto`. Restam o envio da branch e o PR para a `dev` (seção 13).
 >
 > As decisões D1 a D8 (seção 12) foram aprovadas conforme as propostas: auxiliares do ESLint instalados; Prism.js adiado; rota provisória de módulos; slugs propostos; `README.md` curto; `DECISOES-PENDENTES.md` fora desta Issue; campo `engines` no `package.json`; prefixo `chore:`. A aprovação do plano inclui o envio da branch e a abertura do PR para a `dev`.
 
@@ -69,16 +69,16 @@ Análise feita em 18/11/2026, depois de um `git fetch`.
 
 ### Dentro do escopo
 
-- [ ] Inicializar o projeto com Vite, React e TypeScript.
-- [ ] Configurar o Tailwind CSS.
-- [ ] Configurar o React Router com `HashRouter`.
-- [ ] Instalar o Lucide React e usá-lo pelo menos uma vez, para comprovar que funciona.
-- [ ] Organizar os diretórios.
-- [ ] Configurar os scripts do `package.json`.
-- [ ] Configurar o ESLint.
-- [ ] Definir `base: '/bagre-robo-maker/'` no Vite.
-- [ ] Criar a página inicial mínima.
-- [ ] Preparar a estrutura para os cinco módulos: uma lista de dados com os títulos já documentados no `AGENTS.md`, seção 3.
+- [x] Inicializar o projeto com Vite, React e TypeScript.
+- [x] Configurar o Tailwind CSS.
+- [x] Configurar o React Router com `HashRouter`.
+- [x] Instalar o Lucide React e usá-lo pelo menos uma vez, para comprovar que funciona.
+- [x] Organizar os diretórios.
+- [x] Configurar os scripts do `package.json`.
+- [x] Configurar o ESLint.
+- [x] Definir `base: '/bagre-robo-maker/'` no Vite.
+- [x] Criar a página inicial mínima.
+- [x] Preparar a estrutura para os cinco módulos: uma lista de dados com os títulos já documentados no `AGENTS.md`, seção 3.
 
 ### Fora do escopo (conforme a Issue)
 
@@ -193,73 +193,73 @@ Só começam **depois da aprovação deste documento**.
 
 ### Etapa A — Preparação da branch
 
-- [ ] Rodar `git fetch origin` e confirmar que a `main` local corresponde a `origin/main`.
-- [ ] Confirmar que a árvore de trabalho está limpa, exceto pelo `TASKS-1.md`.
-- [ ] Criar `feat/1-estrutura-inicial-do-projeto` a partir de `origin/main`.
-- [ ] Adicionar o `TASKS-1.md` à branch.
-- [ ] Commit: `docs: adicionar planejamento TASKS-1 da estrutura inicial`
+- [x] Rodar `git fetch origin` e confirmar que a `main` local corresponde a `origin/main`.
+- [x] Confirmar que a árvore de trabalho está limpa, exceto pelo `TASKS-1.md`.
+- [x] Criar `feat/1-estrutura-inicial-do-projeto` a partir de `origin/main`.
+- [x] Adicionar o `TASKS-1.md` à branch.
+- [x] Commit: `docs: adicionar planejamento TASKS-1 da estrutura inicial`
 
 ### Etapa B — Inicialização com Vite, React e TypeScript
 
-- [ ] Gerar o template oficial `react-ts` do Vite num diretório temporário, **fora do repositório**.
-- [ ] Copiar para o repositório: `index.html`, `vite.config.ts`, os `tsconfig*.json`, `eslint.config.js`, `.gitignore`, `src/main.tsx` e `src/App.tsx`.
-- [ ] Ajustar o `package.json`: nome `bagre-robo-maker`, `"private": true`, `"type": "module"` e os scripts da seção 9.
-- [ ] Remover o conteúdo de demonstração do template: contador, logos e `App.css`.
-- [ ] Ajustar o `index.html`: `lang="pt-BR"`, título "Bagre Robô Maker" e meta viewport.
-- [ ] Rodar `npm install` para gerar o `package-lock.json`.
-- [ ] Verificar: `npm run typecheck` e `npm run build`.
-- [ ] Commit: `feat: inicializar projeto com Vite, React e TypeScript`
+- [x] Gerar o template oficial `react-ts` do Vite num diretório temporário, **fora do repositório**.
+- [x] Copiar para o repositório: `index.html`, `vite.config.ts`, os `tsconfig*.json`, `eslint.config.js`, `.gitignore`, `src/main.tsx` e `src/App.tsx`.
+- [x] Ajustar o `package.json`: nome `bagre-robo-maker`, `"private": true`, `"type": "module"` e os scripts da seção 9.
+- [x] Remover o conteúdo de demonstração do template: contador, logos e `App.css`.
+- [x] Ajustar o `index.html`: `lang="pt-BR"`, título "Bagre Robô Maker" e meta viewport.
+- [x] Rodar `npm install` para gerar o `package-lock.json`.
+- [x] Verificar: `npm run typecheck` e `npm run build`.
+- [x] Commit: `feat: inicializar projeto com Vite, React e TypeScript`
 
 ### Etapa C — Base do Vite
 
-- [ ] Definir `base: '/bagre-robo-maker/'` no `vite.config.ts`.
-- [ ] Verificar que o servidor de desenvolvimento responde em `/bagre-robo-maker/`.
-- [ ] Verificar que os arquivos gerados em `dist/` usam o prefixo `/bagre-robo-maker/assets/`.
-- [ ] Commit: `feat: configurar base do Vite para o GitHub Pages`
+- [x] Definir `base: '/bagre-robo-maker/'` no `vite.config.ts`.
+- [x] Verificar que o servidor de desenvolvimento responde em `/bagre-robo-maker/`.
+- [x] Verificar que os arquivos gerados em `dist/` usam o prefixo `/bagre-robo-maker/assets/`.
+- [x] Commit: `feat: configurar base do Vite para o GitHub Pages`
 
 ### Etapa D — Tailwind CSS
 
-- [ ] Instalar `tailwindcss` e `@tailwindcss/vite`.
-- [ ] Registrar o plugin no `vite.config.ts`.
-- [ ] Criar `src/styles/index.css` com `@import "tailwindcss";` e importá-lo no `main.tsx`.
-- [ ] Verificar que classes utilitárias aplicadas na página aparecem no build.
-- [ ] Commit: `feat: configurar Tailwind CSS`
+- [x] Instalar `tailwindcss` e `@tailwindcss/vite`.
+- [x] Registrar o plugin no `vite.config.ts`.
+- [x] Criar `src/styles/index.css` com `@import "tailwindcss";` e importá-lo no `main.tsx`.
+- [x] Verificar que classes utilitárias aplicadas na página aparecem no build.
+- [x] Commit: `feat: configurar Tailwind CSS`
 
 ### Etapa E — React Router com `HashRouter`
 
-- [ ] Instalar `react-router`.
-- [ ] Envolver a aplicação com `HashRouter` no `main.tsx`.
-- [ ] Criar `src/routes/AppRoutes.tsx` com as rotas da seção 6.
-- [ ] Criar `HomePage`, `ModulePage` (provisória) e `NotFoundPage`.
-- [ ] Commit: `feat: configurar React Router com HashRouter`
+- [x] Instalar `react-router`.
+- [x] Envolver a aplicação com `HashRouter` no `main.tsx`.
+- [x] Criar `src/routes/AppRoutes.tsx` com as rotas da seção 6.
+- [x] Criar `HomePage`, `ModulePage` (provisória) e `NotFoundPage`.
+- [x] Commit: `feat: configurar React Router com HashRouter`
 
 ### Etapa F — Estrutura para os módulos, layout e Lucide React
 
-- [ ] Instalar `lucide-react`.
-- [ ] Criar `src/data/modules.ts` com o tipo `EducationalModule` e a lista dos 5 módulos (`id`, `slug`, `title`), usando só os títulos do `AGENTS.md`.
-- [ ] Criar `AppLayout` com HTML semântico: `<header>`, `<main>`, `<footer>` e link "Pular para o conteúdo".
-- [ ] Página inicial mínima com o nome do projeto, uma frase curta baseada no `AGENTS.md`, seção 1, e a lista dos módulos com links para as rotas provisórias.
-- [ ] Usar pelo menos um ícone do Lucide React, importado individualmente, com `aria-hidden` quando for decorativo.
-- [ ] `ModulePage` mostra o título do módulo e o aviso "Conteúdo em preparação". `NotFoundPage` mostra um link de volta ao início.
-- [ ] Commit: `feat: criar layout e página inicial com lista de módulos`
+- [x] Instalar `lucide-react`.
+- [x] Criar `src/data/modules.ts` com o tipo `EducationalModule` e a lista dos 5 módulos (`id`, `slug`, `title`), usando só os títulos do `AGENTS.md`.
+- [x] Criar `AppLayout` com HTML semântico: `<header>`, `<main>`, `<footer>` e link "Pular para o conteúdo".
+- [x] Página inicial mínima com o nome do projeto, uma frase curta baseada no `AGENTS.md`, seção 1, e a lista dos módulos com links para as rotas provisórias.
+- [x] Usar pelo menos um ícone do Lucide React, importado individualmente, com `aria-hidden` quando for decorativo.
+- [x] `ModulePage` mostra o título do módulo e o aviso "Conteúdo em preparação". `NotFoundPage` mostra um link de volta ao início.
+- [x] Commit: `feat: criar layout e página inicial com lista de módulos`
 
 ### Etapa G — ESLint
 
-- [ ] Revisar o `eslint.config.js` do template: ignorar `dist`, usar as regras recomendadas de TypeScript e de React Hooks.
-- [ ] Rodar `npm run lint` e corrigir os apontamentos.
-- [ ] Commit, se houver ajustes: `chore: ajustar configuração do ESLint`
+- [x] Revisar o `eslint.config.js` do template: ignorar `dist`, usar as regras recomendadas de TypeScript e de React Hooks.
+- [x] Rodar `npm run lint` e corrigir os apontamentos.
+- [x] Commit, se houver ajustes: `chore: ajustar configuração do ESLint`
 
 ### Etapa H — Validação completa (seção 10)
 
-- [ ] Executar todos os critérios de validação e registrar os resultados.
+- [x] Executar todos os critérios de validação e registrar os resultados.
 
 ### Etapa I — Encerramento
 
-- [ ] Atualizar este `TASKS-1.md` com o andamento real e marcar os checklists.
-- [ ] Criar o relatório final em `docs/relatorios/`.
-- [ ] Commit: `docs: atualizar TASKS-1 e adicionar relatório da Issue 1`
+- [x] Atualizar este `TASKS-1.md` com o andamento real e marcar os checklists.
+- [x] Criar o relatório final em `docs/relatorios/`.
+- [x] Commit: `docs: atualizar TASKS-1 e adicionar relatório da Issue 1`
 - [ ] Enviar a branch e abrir o PR para a `dev`, com título e descrição em português e referência a `#1`.
-- [ ] **Não realizar o merge.**
+- [x] **Não realizar o merge.**
 
 ## 8. Arquivos que serão criados ou modificados
 
@@ -339,13 +339,13 @@ O template será gerado fora do repositório com `npm create vite@latest <direto
 
 ## 11. Critérios de conclusão
 
-- [ ] Todos os critérios de aceitação da Issue #1 foram atendidos.
-- [ ] As validações V1 a V15 foram executadas, com os resultados registrados no relatório final.
-- [ ] Nenhuma dependência fora da seção 5 foi adicionada.
-- [ ] Nenhum conteúdo educacional além da página inicial mínima foi implementado.
-- [ ] Os textos visíveis estão em português brasileiro e os identificadores em inglês.
-- [ ] Os commits são atômicos, com mensagens em português e prefixos convencionais.
-- [ ] O `TASKS-1.md` está atualizado e o relatório final está em `docs/relatorios/`.
+- [x] Todos os critérios de aceitação da Issue #1 foram atendidos.
+- [x] As validações V1 a V15 foram executadas, com os resultados registrados no relatório final.
+- [x] Nenhuma dependência fora da seção 5 foi adicionada.
+- [x] Nenhum conteúdo educacional além da página inicial mínima foi implementado.
+- [x] Os textos visíveis estão em português brasileiro e os identificadores em inglês.
+- [x] Os commits são atômicos, com mensagens em português e prefixos convencionais.
+- [x] O `TASKS-1.md` está atualizado e o relatório final está em `docs/relatorios/`.
 - [ ] O PR está aberto para a `dev`, sem merge.
 
 ## 12. Riscos e decisões que dependem de aprovação
@@ -372,3 +372,45 @@ O template será gerado fora do repositório com `npm create vite@latest <direto
 | Esquecer o `base` em links ou recursos | Usar sempre o roteamento (`Link`) e imports do Vite, nunca caminhos absolutos fixos; checar com V5 e V6. |
 | Esta sessão do Claude Code está configurada para enviar alterações apenas à branch `claude/laughing-einstein-6xy9bf` | Enviar a branch `feat/1-estrutura-inicial-do-projeto` exige sua autorização explícita na aprovação deste plano. |
 | O site ainda não pode ser publicado (Pages não configurado, repositório privado) | Fora do escopo. A validação é toda local, com `npm run preview`. |
+
+## 13. Registro de execução
+
+### 13.1 Desvios em relação ao plano
+
+| # | Planejado | Executado | Motivo |
+|---|-----------|-----------|--------|
+| 1 | Copiar o `eslint.config.js` do template do Vite | O ESLint foi configurado manualmente | O template atual do Vite (`create-vite`) passou a usar `oxlint` no lugar do ESLint. O `oxlint` e o `.oxlintrc.json` **não** foram copiados, porque não fazem parte da stack aprovada. |
+| 2 | Usar a versão do TypeScript do template | TypeScript fixado em `~6.0.3` | O template instala o TypeScript 7, mas o `typescript-eslint` 8.73 (versão estável mais recente) só aceita `typescript >=4.8.4 <6.1.0`. O ajuste foi para um commit próprio (`chore:`). |
+| 3 | Usar o `@types/node` do template | Não instalado; `"types": []` no `tsconfig.node.json` | O `vite.config.ts` não usa APIs do Node, e o pacote não estava entre as dependências aprovadas. O `tsc` passa sem ele. |
+| 4 | Criar `src/data/modules.ts` na etapa F | Criado na etapa E | A `ModulePage` (etapa E) precisa da lista de módulos para resolver o slug. |
+| 5 | Pacote `react-router` na versão 7 | Instalada a versão 8.5.2 | Era a versão estável disponível. Continua exportando `HashRouter`, `Routes`, `Route`, `Link` e `useParams`. |
+| 6 | Não previsto | Componente `src/components/BackToHomeLink.tsx` | Evita duplicar o link de volta e uma importação circular entre `ModulePage` e `NotFoundPage`. |
+| 7 | Não previsto | `src/assets/.gitkeep` | Mantém no Git a pasta `assets/` prevista na estrutura, ainda vazia. |
+
+### 13.2 Decisões técnicas tomadas durante a implementação
+
+- **Link "Pular para o conteúdo":** com `HashRouter`, um link comum `href="#id"` mudaria a rota e levaria à página não encontrada. Por isso o link move o foco para o `<main>` via script e cancela a navegação.
+- **Título da aba por página:** usa o suporte nativo do React 19 a `<title>` dentro dos componentes, sem nenhuma dependência extra.
+- **Slugs:** os aprovados na decisão D4, definidos em `src/data/modules.ts`.
+
+### 13.3 Resultado das validações
+
+| # | Resultado |
+|---|-----------|
+| V1 | OK: página inicial em `http://localhost:5173/bagre-robo-maker/` |
+| V2 | OK: `npm run typecheck` sem erros |
+| V3 | OK: `npm run lint` sem erros nem avisos, analisando 11 arquivos; um teste com erro proposital confirmou que as regras estão ativas |
+| V4 | OK: `npm run build` sem erros (JS 265,32 kB, ou 84,79 kB com gzip; CSS 13,12 kB, ou 3,39 kB com gzip) |
+| V5 | OK: `dist/index.html` referencia `/bagre-robo-maker/assets/...` e `/bagre-robo-maker/favicon.svg` |
+| V6 | OK: preview em `http://localhost:4173/bagre-robo-maker/` com status 200 |
+| V7 | OK: clique em um módulo, voltar e avançar no navegador |
+| V8 | OK: link direto `#/modulos/sensor-ultrassonico-sonar` e recarga, sem 404; título da aba correto |
+| V9 | OK: `#/rota-inexistente` e `#/modulos/nao-existe` mostram "Página não encontrada" |
+| V10 | OK: classes do Tailwind aplicadas |
+| V11 | OK: ícones do Lucide React renderizados (cabeçalho e lista) |
+| V12 | OK: sem rolagem horizontal em 375 px e 1280 px, nas três rotas |
+| V13 | OK: `lang="pt-BR"`; o link de pular é o primeiro foco, fica visível e não altera a rota; foco visível nos links; ativação pelo teclado |
+| V14 | OK: nenhum erro no console |
+| V15 | OK: `package-lock.json` versionado; `node_modules/` e `dist/` ignorados |
+
+As validações V1 e V6 a V14 foram automatizadas com o Playwright do ambiente do agente, sem adicioná-lo ao projeto. `npm audit`: 0 vulnerabilidades.
