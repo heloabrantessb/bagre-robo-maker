@@ -7,7 +7,7 @@
 | Campo | Valor |
 |-------|-------|
 | Issue | [#3 — Implementar interface principal e navegação entre módulos](https://github.com/heloabrantessb/bagre-robo-maker/issues/3) |
-| Planejamento | `TASKS-3.md` (raiz do repositório), aprovado em 18/11/2026 |
+| Planejamento | `TASKS-3.md`, aprovado em 18/11/2026. Retirado do repositório depois da integração; o conteúdo final está no histórico do Git (commit `4ecee67`) |
 | Branch | `feat/3-interface-principal-e-navegacao`, criada a partir de `main` (`713884b`) |
 | Pull Request | [#5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5), com destino à `dev`, aguardando revisão (sem merge pelo agente) |
 
