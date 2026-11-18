@@ -28,16 +28,28 @@ export function getModulePath(educationalModule: EducationalModule): string {
   return `/modulos/${educationalModule.slug}`
 }
 
-// Posição do módulo na sequência didática (1 a TOTAL_MODULES); não representa progresso do aluno.
-export function getModulePosition(educationalModule: EducationalModule): number {
-  return educationalModules.indexOf(educationalModule) + 1
+// Índice do módulo na sequência, localizado pelo id (não pela referência do objeto); -1 se desconhecido.
+function findModuleIndex(educationalModule: Pick<EducationalModule, 'id'>): number {
+  return educationalModules.findIndex(({ id }) => id === educationalModule.id)
 }
 
-export function getAdjacentModules(educationalModule: EducationalModule): AdjacentModules {
-  const index = educationalModules.indexOf(educationalModule)
+// Posição do módulo na sequência didática (1 a TOTAL_MODULES); não representa progresso do aluno.
+// Retorna undefined para um módulo que não pertence à sequência.
+export function getModulePosition(educationalModule: Pick<EducationalModule, 'id'>): number | undefined {
+  const index = findModuleIndex(educationalModule)
+  return index === -1 ? undefined : index + 1
+}
+
+// Para um módulo que não pertence à sequência, não há anterior nem próximo.
+export function getAdjacentModules(educationalModule: Pick<EducationalModule, 'id'>): AdjacentModules {
+  const index = findModuleIndex(educationalModule)
+
+  if (index === -1) {
+    return { previousModule: undefined, nextModule: undefined }
+  }
 
   return {
-    previousModule: index > 0 ? educationalModules[index - 1] : undefined,
-    nextModule: index >= 0 && index < TOTAL_MODULES - 1 ? educationalModules[index + 1] : undefined,
+    previousModule: educationalModules[index - 1],
+    nextModule: educationalModules[index + 1],
   }
 }

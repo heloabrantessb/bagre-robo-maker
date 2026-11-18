@@ -7,6 +7,11 @@ interface ModulePositionProps {
 // Indicador estático da posição do módulo na sequência didática (RF11); não representa progresso do aluno.
 export function ModulePosition({ educationalModule }: ModulePositionProps) {
   const position = getModulePosition(educationalModule)
+
+  if (position === undefined) {
+    return null
+  }
+
   const percentage = (position / TOTAL_MODULES) * 100
 
   return (
