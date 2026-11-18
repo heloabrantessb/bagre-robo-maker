@@ -87,7 +87,9 @@ Nenhum arquivo foi removido. Nenhuma dependência foi adicionada (`package.json`
 | `1ad5ed4` | `docs: registrar link do PR no TASKS-3 e no relatório` |
 | `e5f7fc9` | `fix: localizar módulos pelo id nas funções de sequência` (revisão) |
 | `24c61b1` | `test: adicionar verificação das funções de sequência dos módulos` (revisão) |
-| último | `docs: detalhar procedimento das validações e registrar ajustes da revisão` (revisão) |
+| `6cd6fcd` | `docs: detalhar procedimento das validações e registrar ajustes da revisão` (revisão) |
+| `1e9c0ba` | `fix: tornar verify:modules compatível com a faixa de Node.js declarada` (segunda revisão) |
+| último | `docs: registrar ajuste de compatibilidade do verify:modules` (segunda revisão) |
 
 ## 6. Testes e validações
 
@@ -101,8 +103,8 @@ Executados a partir da raiz do repositório, com as dependências do `package-lo
 |-----------|---------|-----------|
 | V1 | `npm run typecheck` | Sem erros |
 | V2 | `npm run lint` | Sem erros nem avisos |
-| V3 | `npm run build` | Sem erros; JS 87,03 kB e CSS 4,48 kB (gzip) após a revisão |
-| — | `npm run verify:modules` | Todas as verificações passam (adicionado na revisão; ver seção 9) |
+| V3 | `npm run build` | Sem erros; JS 87,03 kB e CSS 4,49 kB (gzip) após a revisão |
+| — | `npm run verify:modules` | Todas as verificações passam em toda a faixa de Node.js suportada (adicionado na revisão; ver seção 9) |
 | V4 (servidor) | `npm run preview` | Aplicação servida em `http://localhost:4173/bagre-robo-maker/` |
 
 ### 6.2 Validação pontual de navegador com Playwright (ambiente de trabalho do agente)
@@ -163,19 +165,29 @@ Em resposta à revisão técnica do responsável no [PR #5](https://github.com/h
 1. **Robustez das funções de sequência** (`src/data/modules.ts`):
    - `getModulePosition` e `getAdjacentModules` passaram a localizar o módulo pelo `id`, e não pela referência do objeto (`indexOf`).
    - Comportamento explícito para um módulo desconhecido: `getModulePosition` retorna `undefined` e `getAdjacentModules` retorna `{ previousModule: undefined, nextModule: undefined }`. O `ModulePosition` não exibe o indicador nesse caso.
-   - **Verificação do caso-limite:** `scripts/verify-modules.ts`, executado com `npm run verify:modules`. Usa só o `node:assert` (sem Vitest e sem dependências) e cobre:
+   - **Verificação do caso-limite:** `scripts/verify-modules.mjs`, executado com `npm run verify:modules`. Usa só o `node:assert` e o pacote `typescript`, já instalado (sem Vitest e sem dependências novas), e cobre:
      - as posições dos 5 módulos;
      - um objeto equivalente criado separadamente;
      - as extremidades da sequência;
      - um módulo desconhecido.
    - O mesmo script, executado contra a versão anterior (`indexOf`), falha: o objeto equivalente recebe a posição `0` em vez de `2`. Isso confirma que a verificação detecta o problema apontado.
-   - **Limitação:** o script depende de o Node.js executar TypeScript diretamente (versão 22.18 ou superior). Ele não entra no `npm run typecheck`, porque a verificação de tipos de arquivos Node exigiria o `@types/node`, que não está aprovado.
+   - **Compatibilidade com o Node (segunda revisão):**
+     - A primeira versão do script (`scripts/verify-modules.ts`) dependia da execução nativa de TypeScript pelo Node.js, disponível só a partir do 22.18. Isso contrariava a faixa declarada no `package.json` (`^20.19.0 || >=22.12.0`).
+     - O script foi reescrito como `scripts/verify-modules.mjs`: o `src/data/modules.ts` é convertido para JavaScript em memória com `ts.transpileModule`, do pacote `typescript` (dependência de desenvolvimento existente), e carregado por uma URL `data:`.
+     - Os recursos usados (`import.meta.url`, importação de URL `data:`, `await` no nível superior e `node:assert/strict`) existem em todas as versões da faixa declarada. O `typescript` 6.0 exige Node `>=14.17`.
+     - Nem a versão mínima do Node nem as dependências foram alteradas.
+   - **Como foi validado:**
+     - No Node 22.23.5 do ambiente, com e sem a execução de TypeScript (`node --no-experimental-strip-types`). A execução sem TypeScript reproduz a condição do Node 20.19 e do 22.12 a 22.17: nela, a versão `.ts` anterior falha com `ERR_UNKNOWN_FILE_EXTENSION` e a nova passa.
+     - Não foi possível executar binários do Node 20 ou 22.12 no ambiente, porque o download foi bloqueado.
+   - **Limitações:**
+     - O `src/data/modules.ts` não pode importar outros arquivos locais, porque o módulo convertido é carregado de uma URL `data:`.
+     - O script não passa pelo `npm run typecheck`.
 2. **Reprodutibilidade:** a seção 6 foi reescrita, separando os comandos do projeto, a validação pontual com Playwright (script anexado em `docs/relatorios/anexos/`) e as verificações manuais.
 
 Arquivos adicionados ou alterados na revisão:
 - `src/data/modules.ts`
 - `src/components/modules/ModulePosition.tsx`
-- `scripts/verify-modules.ts` (novo)
+- `scripts/verify-modules.mjs` (novo; substituiu o `scripts/verify-modules.ts` da primeira revisão)
 - `package.json` (script `verify:modules`)
 - `docs/relatorios/anexos/2026-11-18-issue-3-validacao-navegador.cjs` (novo)
 - este relatório e o `TASKS-3.md`

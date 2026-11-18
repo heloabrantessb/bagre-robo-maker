@@ -471,6 +471,7 @@ O detalhamento está no relatório, seção 6. `npm audit`: 0 vulnerabilidades.
 ### 11.3 Ajustes após a revisão do PR #5
 
 - [x] `getModulePosition` e `getAdjacentModules` localizam o módulo pelo `id`. Para um módulo desconhecido, a posição é `undefined` e não há vizinhos; o `ModulePosition` não renderiza nesse caso.
-- [x] `scripts/verify-modules.ts` + `npm run verify:modules` (`node:assert`, sem dependências). Ele falha na versão anterior (posição `0` para um objeto equivalente) e passa na nova.
+- [x] `scripts/verify-modules.mjs` + `npm run verify:modules` (`node:assert`, sem dependências). Ele falha na versão anterior (posição `0` para um objeto equivalente) e passa na nova.
+- [x] **Segunda revisão:** o script, antes em `.ts`, dependia da execução nativa de TypeScript (Node.js 22.18 ou superior), o que contrariava a faixa declarada no `engines` (`^20.19.0 || >=22.12.0`). Ele foi reescrito em `.mjs`, convertendo o `src/data/modules.ts` em memória com o pacote `typescript`, já dependência de desenvolvimento. Validado com a execução de TypeScript desativada (`node --no-experimental-strip-types`). A versão mínima do Node e as dependências não foram alteradas.
 - [x] Relatório, seção 6, reescrita: comandos do projeto, validação pontual com Playwright (script anexado) e verificações manuais.
 - [x] Revalidação depois dos ajustes: `verify:modules`, `typecheck`, `lint`, `build` (JS 87,03 kB com gzip) e o script de navegador (62/62).
