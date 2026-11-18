@@ -7,9 +7,9 @@
 | Campo | Valor |
 |-------|-------|
 | Issue | [#1 — Configurar estrutura inicial com Vite, React, TypeScript, Tailwind CSS e React Router](https://github.com/heloabrantessb/bagre-robo-maker/issues/1) |
-| Planejamento | `TASKS-1.md` (raiz do repositório), aprovado em 18/11/2026 |
+| Planejamento | `TASKS-1.md`, aprovado em 18/11/2026. Retirado do repositório depois da integração; o conteúdo final está no histórico do Git (commit `d2c8872`) |
 | Branch | `feat/1-estrutura-inicial-do-projeto`, criada a partir de `main` (`186861a`) |
-| Pull Request | [#2](https://github.com/heloabrantessb/bagre-robo-maker/pull/2), com destino à `dev`, aguardando revisão (sem merge pelo agente) |
+| Pull Request | [#2](https://github.com/heloabrantessb/bagre-robo-maker/pull/2), com destino à `dev`. **Integrado** pelo responsável (ver "Atualização histórica" ao final) |
 
 ## 2. Resumo
 
@@ -121,3 +121,12 @@ As validações no navegador foram automatizadas com o Playwright do ambiente do
 - **Publicação:** GitHub Pages e workflow de publicação continuam fora do escopo; dependem da configuração do Pages pelo responsável e de uma Issue própria.
 - **`DECISOES-PENDENTES.md`:** está desatualizado em relação a `main` e `dev` (decisão D6, tarefa à parte).
 - **Rolagem ao navegar:** o `HashRouter` não restaura a rolagem ao topo automaticamente. Hoje as páginas são curtas e isso não afeta o uso; deve ser avaliado quando os módulos ganharem conteúdo longo.
+
+## Atualização histórica
+
+Registro adicionado depois da conclusão, para que este relatório não seja lido como status atual. Os horários estão em UTC.
+
+| Data | Evento |
+|------|--------|
+| 18/11/2026, 18:43 | [PR #2](https://github.com/heloabrantessb/bagre-robo-maker/pull/2) integrado à `dev` pelo responsável |
+| 18/11/2026, 20:43 | `dev` integrada à `main` pelo [PR #4](https://github.com/heloabrantessb/bagre-robo-maker/pull/4) (commit `713884b`) |

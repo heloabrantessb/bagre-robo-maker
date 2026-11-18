@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Planejamentos de Issues: sempre locais (AGENTS.md, seção 12.1)
+TASKS-*.md
