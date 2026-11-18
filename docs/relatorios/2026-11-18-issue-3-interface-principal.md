@@ -9,7 +9,7 @@
 | Issue | [#3 — Implementar interface principal e navegação entre módulos](https://github.com/heloabrantessb/bagre-robo-maker/issues/3) |
 | Planejamento | `TASKS-3.md` (raiz do repositório), aprovado em 18/11/2026 |
 | Branch | `feat/3-interface-principal-e-navegacao`, criada a partir de `main` (`713884b`) |
-| Pull Request | Aberto para a `dev`; o link é registrado no `TASKS-3.md` |
+| Pull Request | [#5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5), com destino à `dev`, aguardando revisão (sem merge pelo agente) |
 
 ## 2. Resumo
 
@@ -83,7 +83,8 @@ Nenhum arquivo foi removido. Nenhuma dependência foi adicionada (`package.json`
 | `6558cf1` | `feat: implementar página provisória de módulo com navegação sequencial` |
 | `c7eaf0a` | `feat: ajustar página não encontrada ao tema` |
 | `fbb3e13` | `docs: atualizar rotas no README` |
-| último | `docs: atualizar TASKS-3 e adicionar relatório da Issue 3` |
+| `517ad82` | `docs: atualizar TASKS-3 e adicionar relatório da Issue 3` |
+| último | `docs: registrar link do PR no TASKS-3 e no relatório` |
 
 ## 6. Testes e validações
 

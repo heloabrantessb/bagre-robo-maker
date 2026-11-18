@@ -1,6 +1,6 @@
 # TASKS-3 — Interface principal e navegação entre módulos
 
-> **Status:** planejamento **aprovado** pelo responsável em 18/11/2026, incluindo as decisões D1 a D5 (seção 9.2) e o envio da branch com PR para a `dev`. Implementação **concluída e validada** na branch `feat/3-interface-principal-e-navegacao`. Restam o envio da branch e o PR para a `dev`.
+> **Status:** planejamento **aprovado** pelo responsável em 18/11/2026, incluindo as decisões D1 a D5 (seção 9.2) e o envio da branch com PR para a `dev`. Implementação **concluída e validada** na branch `feat/3-interface-principal-e-navegacao`. Branch enviada e [PR #5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5) aberto para a `dev`, aguardando revisão do responsável.
 >
 > **Bloqueios resolvidos:** B1, com a `main` atualizada pelo responsável (merge da `dev` no PR #4, commit `713884b`); B2, com o arquivo renomeado para `TASKS-3.md`.
 
@@ -324,7 +324,7 @@ As etapas só começam **após a aprovação deste documento e a resolução de 
 - [x] Atualizar o `TASKS` com o andamento real e os desvios.
 - [x] Criar o relatório final em `docs/relatorios/`.
 - [x] Commit: `docs: atualizar TASKS-3 e adicionar relatório da Issue 3`
-- [ ] Enviar a branch e abrir o PR para a `dev`, referenciando a Issue #3.
+- [x] Enviar a branch e abrir o PR para a `dev`, referenciando a Issue #3.
 - [x] **Não realizar o merge.**
 
 ## 7. Critérios de aceite (Issue #3) e onde são atendidos
