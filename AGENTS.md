@@ -222,7 +222,7 @@ Toda nova funcionalidade, melhoria ou correção segue esta sequência. Não pul
 ### Etapa 4 — Planejamento em `TASKS-[numero-da-issue].md`
 
 - Elaborar o documento `TASKS-[numero-da-issue].md`.
-- Apresentá-lo inicialmente como **rascunho** (arquivo `.md` local, não versionado), sem criar ou modificar arquivos na `main`.
+- Mantê-lo **sempre local e fora do Git**, antes e depois da aprovação. O padrão `TASKS-*.md` está no `.gitignore` (seção 12.1).
 - Escrevê-lo inteiramente em português brasileiro, preservando nomes técnicos e identificadores em inglês.
 - Conteúdo obrigatório:
   1. Referência e objetivo da Issue.
@@ -254,9 +254,10 @@ Após a aprovação do planejamento:
   | `feat/` | Novas funcionalidades e melhorias. |
   | `fix/` | Correções. |
   | `refactor/` | Refatorações, sem mudança de comportamento. |
+  | `docs/` | Alterações exclusivamente de documentação. |
 
-  O nome descritivo fica em português, sem acentos, com palavras separadas por hífen, preservando o prefixo em inglês. Exemplos: `feat/12-navegacao-entre-modulos`, `fix/15-validacao-do-quiz`.
-- Adicionar o `TASKS-[numero-da-issue].md` à nova branch — **nunca** diretamente à `main`.
+  O nome descritivo fica em português, sem acentos, com palavras separadas por hífen, preservando o prefixo em inglês. Exemplos: `feat/12-navegacao-entre-modulos`, `fix/15-validacao-do-quiz`, `docs/atualizar-decisoes-pendentes`. Quando a alteração não tiver Issue, o número pode ser omitido.
+- O `TASKS-[numero-da-issue].md` **não** é adicionado à branch: continua apenas local.
 - Se a branch `dev` não existir, **perguntar ao responsável** antes de criá-la.
 
 ### Etapa 6 — Desenvolvimento incremental
@@ -264,7 +265,7 @@ Após a aprovação do planejamento:
 - Desenvolver em pequenas partes, seguindo o planejamento aprovado no `TASKS`.
 - Fazer commits pequenos, atômicos e logicamente organizados, com mensagens em português brasileiro e prefixos convencionais quando apropriado.
 - Executar os testes e verificações pertinentes a cada etapa.
-- Atualizar o `TASKS` conforme o andamento real do trabalho.
+- Atualizar o `TASKS` local conforme o andamento real do trabalho.
 - Não desenvolver diretamente em `main` ou `dev`.
 
 ### Etapa 7 — Push e Pull Request
@@ -281,7 +282,7 @@ Após a aprovação do planejamento:
 Ao concluir o trabalho, apresentar um relatório em Markdown (seção 12), em português brasileiro, salvo em `docs/relatorios/` e versionado na própria branch de trabalho, contendo:
 
 - Número e link da Issue.
-- Nome e localização do arquivo `TASKS`.
+- Resumo do planejamento aprovado no `TASKS` (que não é versionado) e dos desvios em relação a ele.
 - Nome da branch utilizada.
 - Resumo das alterações.
 - Arquivos criados, modificados ou removidos.
@@ -300,11 +301,11 @@ Organização das branches:
 |--------|-------|
 | `main` | Branch principal; origem de todas as branches de trabalho e fonte da publicação no GitHub Pages. |
 | `dev` | Branch de integração; destino de todos os Pull Requests. |
-| `feat/`, `fix/`, `refactor/` | Branches de trabalho (ver seção 9, etapa 5). |
+| `feat/`, `fix/`, `refactor/`, `docs/` | Branches de trabalho (ver seção 9, etapa 5). |
 
 Regras:
 
-1. Toda branch de trabalho (`feat/`, `fix/`, `refactor/`) nasce diretamente da `main`.
+1. Toda branch de trabalho (`feat/`, `fix/`, `refactor/`, `docs/`) nasce diretamente da `main`.
 2. Todo PR de branch de trabalho tem como destino a `dev`.
 3. Nunca realizar merge de PR. O merge é responsabilidade exclusiva do responsável.
 4. Nunca desenvolver diretamente em `main` ou `dev`.
@@ -362,8 +363,8 @@ Regras:
 | Tipo | Local | Versionado? |
 |------|-------|-------------|
 | Relatórios técnicos **relevantes e permanentes** (diagnósticos, relatórios finais, relatórios de testes, análises de arquitetura, registros de decisões) | `docs/relatorios/` | Sim |
-| `TASKS-[numero-da-issue].md` aprovado | Raiz do repositório, na branch de trabalho (seção 9, etapa 5) | Sim, nunca diretamente na `main` |
-| Rascunhos (Issues, `TASKS` antes da aprovação, propostas em discussão) e arquivos temporários | Fora do repositório ou não adicionados ao Git | Não |
+| `TASKS-[numero-da-issue].md` (rascunho e versão aprovada) | Raiz do repositório, apenas local; ignorado pelo Git (`TASKS-*.md` no `.gitignore`) | Não. O registro permanente fica no relatório final, em `docs/relatorios/` |
+| Rascunhos (Issues, propostas em discussão) e arquivos temporários | Fora do repositório ou não adicionados ao Git | Não |
 
 - Nome sugerido para relatórios: `docs/relatorios/AAAA-MM-DD-assunto.md`, em português, sem acentos e com palavras separadas por hífen (ex.: `docs/relatorios/2026-11-18-revisao-da-documentacao.md`).
 - **Não criar relatórios artificiais** apenas para preencher a pasta. Só entra em `docs/relatorios/` o que tiver valor de registro para o projeto.
@@ -397,7 +398,7 @@ Uma tarefa só é considerada concluída quando:
 6. Respeita a convenção de idioma (seção 7).
 7. Não contém informações técnicas inventadas; pendências estão marcadas e foram comunicadas.
 8. Não quebra funcionalidades já existentes.
-9. O `TASKS` está atualizado, o PR para a `dev` foi aberto e o relatório final foi apresentado em Markdown (seções 9 e 12).
+9. O `TASKS` local está atualizado, o PR para a `dev` foi aberto e o relatório final, com o resumo do planejamento e da execução, foi versionado em `docs/relatorios/` (seções 9 e 12).
 
 A **plataforma** é considerada concluída quando os cinco módulos e todos os requisitos RF01–RF11 estiverem implementados e validados segundo os critérios acima, e o site estiver publicado no GitHub Pages.
 
