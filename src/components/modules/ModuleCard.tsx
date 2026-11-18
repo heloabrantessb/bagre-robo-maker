@@ -10,7 +10,7 @@ export function ModuleCard({ educationalModule }: ModuleCardProps) {
   return (
     <Link
       to={getModulePath(educationalModule)}
-      className="group flex h-full items-center gap-4 rounded-xl border border-line bg-white p-4 shadow-sm transition hover:border-brand hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-5"
+      className="group relative flex h-full items-center gap-4 rounded-xl border border-line bg-white p-4 shadow-sm transition hover:border-brand hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-5"
     >
       <span
         aria-hidden="true"
