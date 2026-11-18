@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+/* Identidade visual do Bagre Robô Maker (cores amostradas da referência aprovada). */
+@theme {
+  --color-brand: #18684b;
+  --color-brand-strong: #12553d;
+  --color-brand-soft: #e3f1ea;
+  --color-brand-light: #6ee7b7;
+  --color-ink: #1f2c3a;
+  --color-ink-soft: #2c3b4b;
+  --color-surface-muted: #eff1f3;
+  --color-line: #dfe1e5;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-muted text-ink antialiased;
+  }
+}
