@@ -30,7 +30,7 @@ src/
 ├── App.tsx            # componente raiz (layout + rotas)
 ├── routes/            # definição das rotas
 ├── pages/             # uma página por rota
-├── components/        # componentes compartilhados (layout em components/layout/)
+├── components/        # componentes compartilhados (layout/ e modules/)
 ├── data/              # dados estáticos tipados (ex.: lista de módulos)
 ├── styles/            # CSS global com Tailwind CSS
 └── assets/            # imagens e recursos importados pelo código
@@ -41,3 +41,12 @@ docs/relatorios/       # relatórios técnicos do projeto
 ## Rotas
 
 A aplicação usa `HashRouter`, portanto as rotas ficam após `#` na URL (ex.: `/bagre-robo-maker/#/modulos/desafio-quiz`). Isso garante que links diretos e recargas funcionem no GitHub Pages.
+
+| Rota | Página |
+|------|--------|
+| `#/` | Visão geral: apresentação, objetivos da aula e acesso aos módulos |
+| `#/modulos` | Lista dos cinco módulos |
+| `#/modulos/<slug>` | Página do módulo (provisória, sem conteúdo didático) |
+| qualquer outra | Página não encontrada |
+
+Slugs dos módulos: `biomimetica-garrafa-pet`, `eletronica-transistor-c1815`, `sensor-ultrassonico-sonar`, `programacao-espreita-ataque` e `desafio-quiz` (definidos em `src/data/modules.ts`).
