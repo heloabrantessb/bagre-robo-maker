@@ -9,7 +9,7 @@
 | Issue | [#1 — Configurar estrutura inicial com Vite, React, TypeScript, Tailwind CSS e React Router](https://github.com/heloabrantessb/bagre-robo-maker/issues/1) |
 | Planejamento | `TASKS-1.md` (raiz do repositório), aprovado em 18/11/2026 |
 | Branch | `feat/1-estrutura-inicial-do-projeto`, criada a partir de `main` (`186861a`) |
-| Pull Request | Aberto para a `dev`; o link é informado ao responsável na entrega |
+| Pull Request | [#2](https://github.com/heloabrantessb/bagre-robo-maker/pull/2), com destino à `dev`, aguardando revisão (sem merge pelo agente) |
 
 ## 2. Resumo
 
@@ -83,7 +83,8 @@ Nenhum arquivo existente foi modificado ou removido (`AGENTS.md`, `CLAUDE.md`, `
 | `3f2c744` | `chore: fixar TypeScript 6.0 para compatibilidade com o ESLint` |
 | `45ba2a1` | `chore: configurar ESLint` |
 | `0fab2fc` | `docs: adicionar README com requisitos, comandos e estrutura` |
-| último | `docs: atualizar TASKS-1 e adicionar relatório da Issue 1` |
+| `e2a78f9` | `docs: atualizar TASKS-1 e adicionar relatório da Issue 1` |
+| último | `docs: registrar link do PR no TASKS-1 e no relatório` |
 
 ## 6. Testes e validações
 

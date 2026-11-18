@@ -1,6 +1,6 @@
 # TASKS-1 — Estrutura inicial do projeto
 
-> **Status:** planejamento **aprovado** pelo responsável em 18/11/2026. Implementação **concluída e validada** na branch `feat/1-estrutura-inicial-do-projeto`. Restam o envio da branch e o PR para a `dev` (seção 13).
+> **Status:** planejamento **aprovado** pelo responsável em 18/11/2026. Implementação **concluída e validada** na branch `feat/1-estrutura-inicial-do-projeto`. Branch enviada e [PR #2](https://github.com/heloabrantessb/bagre-robo-maker/pull/2) aberto para a `dev`, aguardando revisão do responsável.
 >
 > As decisões D1 a D8 (seção 12) foram aprovadas conforme as propostas: auxiliares do ESLint instalados; Prism.js adiado; rota provisória de módulos; slugs propostos; `README.md` curto; `DECISOES-PENDENTES.md` fora desta Issue; campo `engines` no `package.json`; prefixo `chore:`. A aprovação do plano inclui o envio da branch e a abertura do PR para a `dev`.
 
@@ -258,7 +258,7 @@ Só começam **depois da aprovação deste documento**.
 - [x] Atualizar este `TASKS-1.md` com o andamento real e marcar os checklists.
 - [x] Criar o relatório final em `docs/relatorios/`.
 - [x] Commit: `docs: atualizar TASKS-1 e adicionar relatório da Issue 1`
-- [ ] Enviar a branch e abrir o PR para a `dev`, com título e descrição em português e referência a `#1`.
+- [x] Enviar a branch e abrir o PR para a `dev`, com título e descrição em português e referência a `#1`.
 - [x] **Não realizar o merge.**
 
 ## 8. Arquivos que serão criados ou modificados
@@ -346,7 +346,7 @@ O template será gerado fora do repositório com `npm create vite@latest <direto
 - [x] Os textos visíveis estão em português brasileiro e os identificadores em inglês.
 - [x] Os commits são atômicos, com mensagens em português e prefixos convencionais.
 - [x] O `TASKS-1.md` está atualizado e o relatório final está em `docs/relatorios/`.
-- [ ] O PR está aberto para a `dev`, sem merge.
+- [x] O PR está aberto para a `dev`, sem merge.
 
 ## 12. Riscos e decisões que dependem de aprovação
 
