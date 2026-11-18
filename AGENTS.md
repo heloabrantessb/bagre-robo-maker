@@ -2,6 +2,8 @@
 
 Documento principal de referência para agentes de programação (e pessoas) que trabalharem neste repositório. Leia-o por completo antes de qualquer alteração.
 
+Neste documento, **responsável** significa a pessoa responsável pelo projeto, que aprova planejamentos, revisa e realiza os merges.
+
 ---
 
 ## 1. Contexto do projeto
@@ -41,7 +43,7 @@ A plataforma possui **cinco módulos**, apresentados nesta ordem (sequência did
 | 4 | Programação C++ — Espreita vs. Ataque | 6, 7 |
 | 5 | Desafio & Quiz Interativo | 8 |
 
-A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não foi definida** (ver seção 10).
+A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não foi definida** (ver seção 14).
 
 ---
 
@@ -71,7 +73,7 @@ A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não f
 | RNF02 | **Acessibilidade:** HTML semântico, navegação por teclado, foco visível, contraste adequado, textos alternativos em imagens e rótulos em controles (referência: WCAG 2.1 nível AA). |
 | RNF03 | **Usabilidade:** interface clara e direta, adequada a uma aula guiada com tempo limitado. |
 | RNF04 | **Desempenho:** carregamento rápido em redes móveis ou Wi-Fi compartilhado; evitar arquivos e bibliotecas pesados. |
-| RNF05 | **Idioma:** todo o conteúdo em **português brasileiro**. |
+| RNF05 | **Idioma:** todo o conteúdo em **português brasileiro** (ver seção 7). |
 | RNF06 | **Compatibilidade:** funcionar nas versões recentes dos principais navegadores (Chrome, Firefox, Safari, Edge), incluindo os móveis. |
 | RNF07 | **Degradação controlada:** se um recurso externo (ex.: Tinkercad) não carregar, o restante da página continua utilizável e há alternativa. |
 
@@ -99,22 +101,192 @@ Implicações:
 
 ---
 
-## 7. Diretrizes de desenvolvimento
+## 7. Convenção de idioma
+
+**Regra geral:** a comunicação humana do projeto é em **português brasileiro**; o código segue as **convenções técnicas de nomenclatura em inglês**.
+
+### 7.1 Em português brasileiro (obrigatório)
+
+- Issues: títulos, descrições, requisitos e critérios de aceitação.
+- Etapas e checklists das Issues.
+- Milestones do GitHub, caso venham a ser utilizados.
+- Arquivos `TASKS-[numero-da-issue].md`.
+- Mensagens de commit.
+- Pull Requests: títulos, descrições e comentários.
+- Documentação técnica e funcional.
+- Comentários explicativos no código.
+- Relatórios de desenvolvimento.
+- Mensagens e instruções de planejamento e execução das tarefas.
+- Todo o conteúdo exibido na plataforma.
+
+### 7.2 Em inglês (convenções técnicas)
+
+- Identificadores: variáveis, funções, métodos, classes, interfaces, componentes, constantes, propriedades e demais identificadores técnicos.
+- Nomes de bibliotecas, frameworks, APIs, comandos, métodos nativos, palavras-chave e termos técnicos próprios das tecnologias usadas.
+- Prefixos convencionais de commit e de branch (`feat`, `fix`, `docs`, `refactor`, `test` etc.).
+
+Não traduza nomes de tecnologias, bibliotecas ou identificadores já estabelecidos em inglês.
+
+### 7.3 Exemplos
+
+| Item | Correto | Incorreto |
+|------|---------|-----------|
+| Identificador | `calculateDistance()`, `UltrasonicSensor`, `MAX_DISTANCE` | `calcularDistancia()`, `SensorUltrassonico` |
+| Comentário | `// Calcula a distância com base no tempo de retorno do eco.` | `// Calculates the distance based on the echo return time.` |
+| Commit | `feat: adicionar navegação entre módulos` | `feat: add module navigation` |
+
+Outros exemplos de commit:
+
+- `fix: corrigir validação das respostas do quiz`
+- `docs: atualizar documentação do projeto`
+- `refactor: simplificar estrutura dos componentes`
+- `test: adicionar testes de validação do quiz`
+
+---
+
+## 8. Diretrizes de desenvolvimento
 
 - **Analisar o repositório** antes de qualquer alteração.
 - **Preservar implementações existentes**; não reescrever o que funciona sem motivo.
 - **Evitar dependências desnecessárias.**
 - **Não inventar informações técnicas sobre o robô** (componentes, pinos, valores, código, medidas). Quando o dado não estiver disponível no repositório ou não tiver sido fornecido, use um marcador explícito (ex.: `<!-- PENDENTE: ... -->`) e informe a pendência.
 - **Não implementar funcionalidades fora do escopo** deste documento sem autorização.
+- **Não presumir decisões** de produto, pedagógicas, de arquitetura ou de implementação ainda não aprovadas.
 - **Desenvolver incrementalmente**, em entregas pequenas e verificáveis.
 - **Priorizar acessibilidade, responsividade e usabilidade.**
-- **Validar as implementações** antes de considerá-las concluídas (ver seção 9).
-- **Utilizar português brasileiro** nos conteúdos e na documentação.
-- **Não realizar commits ou push sem solicitação.**
+- **Validar as implementações** antes de considerá-las concluídas (ver seção 13).
+- **Seguir a convenção de idioma** (seção 7).
+- **Commits, push, branches, Issues e Pull Requests** somente nas etapas previstas no fluxo da seção 9, ou quando solicitados pelo responsável.
 
 ---
 
-## 8. Escopo
+## 9. Fluxo obrigatório de desenvolvimento
+
+Toda nova funcionalidade, melhoria ou correção segue esta sequência. Não pule etapas.
+
+### Etapa 1 — Discussão e definição
+
+- Discutir a funcionalidade com o responsável.
+- Entender o problema, o objetivo e o resultado esperado.
+- Identificar requisitos, restrições e critérios de aceitação.
+- Não presumir decisões de arquitetura ou implementação ainda não aprovadas.
+
+### Etapa 2 — Planejamento
+
+- Analisar os passos necessários para alcançar o objetivo.
+- Identificar dependências, riscos e possíveis impactos.
+- Dividir o trabalho em etapas pequenas e verificáveis.
+- Definir os critérios de conclusão.
+
+### Etapa 3 — Issue no GitHub
+
+- Criar uma Issue para a funcionalidade, melhoria ou correção, inteiramente em português brasileiro.
+- A descrição deve conter: **contexto**, **objetivo**, **escopo**, **critérios de aceitação** e **etapas de execução**.
+- As etapas devem ser organizadas como **checklist** no corpo da Issue.
+- **Não criar objetos Milestone do GitHub.** Neste projeto, o termo "milestones" refere-se às etapas necessárias para alcançar o objetivo, registradas no checklist.
+- Apresentar a Issue e seu planejamento ao responsável.
+
+### Etapa 4 — Planejamento em `TASKS-[numero-da-issue].md`
+
+- Elaborar o documento `TASKS-[numero-da-issue].md`.
+- Apresentá-lo inicialmente como **rascunho**, sem criar ou modificar arquivos na `main`.
+- Escrevê-lo inteiramente em português brasileiro, preservando nomes técnicos e identificadores em inglês.
+- Conteúdo obrigatório:
+  1. Referência e objetivo da Issue.
+  2. Contexto da funcionalidade.
+  3. Escopo e itens fora do escopo.
+  4. Análise técnica.
+  5. Arquivos e componentes potencialmente envolvidos.
+  6. Etapas detalhadas de implementação.
+  7. Critérios de aceitação.
+  8. Estratégia de testes e validação.
+  9. Dependências, riscos e pendências.
+- Apresentar o planejamento ao responsável e **aguardar aprovação**. Não iniciar a implementação antes disso.
+
+### Etapa 5 — Criação da branch
+
+Após a aprovação do planejamento:
+
+- Verificar se a `main` local está atualizada em relação ao remoto.
+- Verificar se a árvore de trabalho está limpa.
+- Identificar alterações locais ou remotas que possam ser afetadas.
+- Criar a branch **diretamente a partir da `main`**, no padrão:
+
+  ```
+  feat/[numero-da-issue]-nome-da-issue
+  ```
+
+  O nome descritivo fica em português, sem acentos, com palavras separadas por hífen, preservando o prefixo `feat`. Exemplo: `feat/12-navegacao-entre-modulos`.
+- Adicionar o `TASKS-[numero-da-issue].md` à nova branch — **nunca** diretamente à `main`.
+- Se a branch `dev` não existir, **perguntar ao responsável** antes de criá-la.
+
+### Etapa 6 — Desenvolvimento incremental
+
+- Desenvolver em pequenas partes, seguindo o planejamento aprovado no `TASKS`.
+- Fazer commits pequenos, atômicos e logicamente organizados, com mensagens em português brasileiro e prefixos convencionais quando apropriado.
+- Executar os testes e verificações pertinentes a cada etapa.
+- Atualizar o `TASKS` conforme o andamento real do trabalho.
+- Não desenvolver diretamente em `main` ou `dev`.
+
+### Etapa 7 — Push e Pull Request
+
+- Enviar a branch de funcionalidade para o repositório remoto.
+- Criar o Pull Request com destino **obrigatório à `dev`**.
+- Título e descrição em português brasileiro, informando o que foi implementado, os testes realizados e a Issue relacionada.
+- Apresentar o PR ao responsável para revisão.
+
+> **Regra fundamental:** agentes **nunca** realizam o merge de Pull Requests. O responsável analisa a `dev` e conduz a revisão e o merge para a `main`.
+
+### Etapa 8 — Relatório final
+
+Ao concluir o trabalho, apresentar um relatório em português brasileiro contendo:
+
+- Número e link da Issue.
+- Nome e localização do arquivo `TASKS`.
+- Nome da branch utilizada.
+- Resumo das alterações.
+- Arquivos criados, modificados ou removidos.
+- Commits realizados.
+- Testes executados e respectivos resultados.
+- Link do Pull Request direcionado à `dev`.
+- Pendências ou limitações identificadas.
+
+---
+
+## 10. Regras obrigatórias de Git e GitHub
+
+1. Toda branch de funcionalidade nasce diretamente da `main`.
+2. Todo PR de funcionalidade tem como destino a `dev`.
+3. Nunca realizar merge de PR.
+4. Nunca desenvolver diretamente em `main` ou `dev`.
+5. Nunca criar uma branch de funcionalidade a partir de `dev` ou de outra branch de funcionalidade.
+6. Nunca fazer force push.
+7. Nunca criar commits vazios.
+8. Nunca alterar o histórico remoto sem autorização.
+9. Nunca sobrescrever alterações do responsável.
+10. Nunca executar operações destrutivas sem autorização.
+11. Sempre verificar o estado do repositório antes de operações Git relevantes.
+12. Diante de divergências, conflitos ou situações não previstas, interromper e consultar o responsável.
+13. Toda comunicação descritiva relacionada ao GitHub é feita em português brasileiro.
+
+---
+
+## 11. Aprovações obrigatórias
+
+Solicitar aprovação do responsável antes de:
+
+- Iniciar o desenvolvimento de uma funcionalidade após o planejamento.
+- Alterar significativamente a arquitetura ou a estrutura do projeto.
+- Adicionar dependências relevantes.
+- Modificar o escopo ou os critérios de aceitação.
+- Tomar decisões de Gitflow não previstas neste documento.
+- Executar operações destrutivas ou que possam afetar o histórico do repositório.
+
+Não é necessário pedir aprovação para cada pequena alteração técnica já contemplada no planejamento aprovado.
+
+---
+
+## 12. Escopo
 
 **Dentro do escopo:** tudo o que está descrito nas seções 3 a 6.
 
@@ -128,24 +300,25 @@ Implicações:
 
 ---
 
-## 9. Critérios de conclusão
+## 13. Critérios de conclusão
 
 Uma tarefa só é considerada concluída quando:
 
-1. Atende ao requisito solicitado, sem extrapolar o escopo.
+1. Atende ao requisito e aos critérios de aceitação da Issue, sem extrapolar o escopo.
 2. Funciona como site estático aberto localmente e é compatível com o GitHub Pages (caminhos relativos, sem dependência de servidor).
 3. Foi verificada em larguras de tela de celular e de computador, sem rolagem horizontal indevida.
 4. Pode ser usada por teclado, com foco visível e rótulos adequados.
 5. Não gera erros no console do navegador.
-6. Mantém todo o conteúdo em português brasileiro.
+6. Respeita a convenção de idioma (seção 7).
 7. Não contém informações técnicas inventadas; pendências estão marcadas e foram comunicadas.
 8. Não quebra funcionalidades já existentes.
+9. O `TASKS` está atualizado, o PR para a `dev` foi aberto e o relatório final foi apresentado (seção 9).
 
 A **plataforma** é considerada concluída quando os cinco módulos e todos os requisitos RF01–RF11 estiverem implementados e validados segundo os critérios acima, e o site estiver publicado no GitHub Pages.
 
 ---
 
-## 10. Informações pendentes
+## 14. Informações pendentes
 
 Itens que ainda precisam ser fornecidos ou definidos pela equipe. Não presuma valores para eles.
 
