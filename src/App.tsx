@@ -1,10 +1,11 @@
+import { AppLayout } from './components/layout/AppLayout.tsx'
 import { AppRoutes } from './routes/AppRoutes.tsx'
 
 function App() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
+    <AppLayout>
       <AppRoutes />
-    </main>
+    </AppLayout>
   )
 }
 

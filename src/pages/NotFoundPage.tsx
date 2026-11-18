@@ -1,12 +1,12 @@
-import { Link } from 'react-router'
+import { BackToHomeLink } from '../components/BackToHomeLink.tsx'
 
 export function NotFoundPage() {
   return (
     <>
       <title>Página não encontrada — Bagre Robô Maker</title>
-      <h1>Página não encontrada</h1>
-      <p>O endereço acessado não existe nesta plataforma.</p>
-      <Link to="/">Voltar para o início</Link>
+      <h1 className="text-3xl font-bold">Página não encontrada</h1>
+      <p className="mt-4 text-slate-700">O endereço acessado não existe nesta plataforma.</p>
+      <BackToHomeLink />
     </>
   )
 }
