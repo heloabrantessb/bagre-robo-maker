@@ -17,6 +17,7 @@ As instruções completas do projeto (escopo, stack, fluxo de trabalho e conven�
 | `npm run dev` | Servidor de desenvolvimento em `http://localhost:5173/bagre-robo-maker/`. |
 | `npm run typecheck` | Verificação de tipos com TypeScript (`tsc`). |
 | `npm run lint` | Análise estática com ESLint. |
+| `npm run verify:modules` | Verifica as funções de sequência dos módulos (`scripts/verify-modules.ts`; requer Node.js `>=22.18`). |
 | `npm run build` | Verificação de tipos e build de produção em `dist/`. |
 | `npm run preview` | Serve o build em `http://localhost:4173/bagre-robo-maker/`. |
 

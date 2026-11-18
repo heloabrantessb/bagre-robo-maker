@@ -353,7 +353,7 @@ As etapas só começam **após a aprovação deste documento e a resolução de 
 | V3 | Build | `npm run build` | Sem erros; aumento de tamanho registrado em relação à Issue #1 |
 | V4 | Preview | `npm run preview` → `http://localhost:4173/bagre-robo-maker/` | Aplicação funcionando a partir do build |
 
-### 8.2 Navegação (no preview, automatizada com o Playwright do ambiente do agente, sem adicioná-lo ao projeto)
+### 8.2 Navegação (no preview, por validação pontual com o Playwright do ambiente do agente, sem adicioná-lo ao projeto)
 
 | # | Validação | Resultado esperado |
 |---|-----------|--------------------|
@@ -462,4 +462,15 @@ Nenhuma dependência foi adicionada; `package.json` e `package-lock.json` não f
 | V16 | OK: nenhum erro no console; 9 capturas (celular, tablet e desktop) enviadas ao responsável, fora do repositório |
 | V17 | OK: rota e slug inexistentes mostram a página não encontrada |
 
-Total: 62 verificações automatizadas com o Playwright do ambiente do agente (sem adicioná-lo ao projeto), todas aprovadas. `npm audit`: 0 vulnerabilidades.
+- **V1 a V3 e o servidor da V4:** comandos do projeto (`npm run typecheck`, `npm run lint`, `npm run build` e `npm run preview`).
+- **V4 a V17:** 62 verificações de uma **validação pontual** com o Playwright instalado no ambiente de trabalho do agente. O Playwright não é dependência do projeto e esse script não é um teste versionado; ele foi anexado como registro em `docs/relatorios/anexos/2026-11-18-issue-3-validacao-navegador.cjs`.
+- **Inspeção visual das capturas:** manual.
+
+O detalhamento está no relatório, seção 6. `npm audit`: 0 vulnerabilidades.
+
+### 11.3 Ajustes após a revisão do PR #5
+
+- [x] `getModulePosition` e `getAdjacentModules` localizam o módulo pelo `id`. Para um módulo desconhecido, a posição é `undefined` e não há vizinhos; o `ModulePosition` não renderiza nesse caso.
+- [x] `scripts/verify-modules.ts` + `npm run verify:modules` (`node:assert`, sem dependências). Ele falha na versão anterior (posição `0` para um objeto equivalente) e passa na nova.
+- [x] Relatório, seção 6, reescrita: comandos do projeto, validação pontual com Playwright (script anexado) e verificações manuais.
+- [x] Revalidação depois dos ajustes: `verify:modules`, `typecheck`, `lint`, `build` (JS 87,03 kB com gzip) e o script de navegador (62/62).

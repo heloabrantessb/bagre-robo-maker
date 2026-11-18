@@ -84,26 +84,62 @@ Nenhum arquivo foi removido. Nenhuma dependência foi adicionada (`package.json`
 | `c7eaf0a` | `feat: ajustar página não encontrada ao tema` |
 | `fbb3e13` | `docs: atualizar rotas no README` |
 | `517ad82` | `docs: atualizar TASKS-3 e adicionar relatório da Issue 3` |
-| último | `docs: registrar link do PR no TASKS-3 e no relatório` |
+| `1ad5ed4` | `docs: registrar link do PR no TASKS-3 e no relatório` |
+| `e5f7fc9` | `fix: localizar módulos pelo id nas funções de sequência` (revisão) |
+| `24c61b1` | `test: adicionar verificação das funções de sequência dos módulos` (revisão) |
+| último | `docs: detalhar procedimento das validações e registrar ajustes da revisão` (revisão) |
 
 ## 6. Testes e validações
 
-As 17 validações planejadas (V1 a V17) passaram, num total de 62 verificações automatizadas no build de produção. O detalhamento está no `TASKS-3.md`, seção 11.2.
+As 17 validações planejadas (V1 a V17) passaram. O detalhamento por item está no `TASKS-3.md`, seção 11.2. Elas foram feitas de três formas diferentes, que **não** devem ser confundidas com uma suíte de testes do projeto.
 
-| Verificação | Resultado |
-|-------------|-----------|
-| `npm run typecheck` | Sem erros |
-| `npm run lint` | Sem erros nem avisos |
-| `npm run build` | Sem erros; JS 87,01 kB e CSS 4,48 kB (gzip) |
-| `npm run preview` | Funcionando em `/bagre-robo-maker/` |
-| Navegação (cabeçalho, 5 módulos, anterior/próximo, voltar do navegador, link direto, recarga, 404) | Funcionando com `HashRouter` |
-| Responsividade (360 a 1440 px) | Sem rolagem horizontal; lista lateral ≥ 1024 px |
-| Contraste (medido no navegador) | De 5,81:1 a 14,19:1 (WCAG AA) |
-| Teclado | Link de pular, foco visível em todos os links, ativação por Enter |
-| Volta ao topo | Funcionando |
-| Console | Sem erros |
+### 6.1 Comandos do projeto (reproduzíveis por qualquer pessoa)
 
-As validações no navegador usaram o Playwright do ambiente do agente, sem adicioná-lo ao projeto. As capturas de tela foram enviadas ao responsável fora do repositório.
+Executados a partir da raiz do repositório, com as dependências do `package-lock.json` (`npm ci`):
+
+| Validação | Comando | Resultado |
+|-----------|---------|-----------|
+| V1 | `npm run typecheck` | Sem erros |
+| V2 | `npm run lint` | Sem erros nem avisos |
+| V3 | `npm run build` | Sem erros; JS 87,03 kB e CSS 4,48 kB (gzip) após a revisão |
+| — | `npm run verify:modules` | Todas as verificações passam (adicionado na revisão; ver seção 9) |
+| V4 (servidor) | `npm run preview` | Aplicação servida em `http://localhost:4173/bagre-robo-maker/` |
+
+### 6.2 Validação pontual de navegador com Playwright (ambiente de trabalho do agente)
+
+- **O que foi:** um script Node.js, executado no ambiente de trabalho do agente, onde o Playwright e o Chromium já estavam instalados globalmente. O Playwright **não** foi adicionado ao projeto, o script **não** é executado por nenhum comando do `package.json` nem por CI, e por isso **não é um teste automatizado versionado**.
+- **Cobertura:** 62 verificações sobre o build de produção servido pelo `npm run preview`, cobrindo V4 (status da página), V5 a V15, V16 (erros no console) e V17.
+- **Registro do procedimento:** o script foi anexado, sem alterações de lógica, em [`docs/relatorios/anexos/2026-11-18-issue-3-validacao-navegador.cjs`](anexos/2026-11-18-issue-3-validacao-navegador.cjs). O cabeçalho do arquivo traz os passos para reproduzir: `npm ci`, `npm run build`, `npx vite preview --port 4173 --strictPort` e `node docs/relatorios/anexos/2026-11-18-issue-3-validacao-navegador.cjs`.
+- **Histórico das execuções:**
+  1. A primeira execução teve 60/62 verificações aprovadas. As duas falhas eram do próprio script (seção 7), que foi corrigido.
+  2. A segunda execução teve 62/62.
+  3. Depois das alterações da revisão, uma nova execução também teve 62/62.
+
+| Validação | O que o script verifica |
+|-----------|-------------------------|
+| V5 | `aria-current="page"` no item certo da navegação em `/`, `/modulos`, `/modulos/:slug` e na página não encontrada |
+| V6 | Cliques em "Visão geral", "Módulos" e no logotipo |
+| V7 | Para cada um dos 5 módulos: abrir pela página inicial, voltar e avançar pelo histórico, voltar pelo link "Visão geral" |
+| V8 | 8 objetivos, 5 cartões e o botão "Começar pelo Módulo 1" |
+| V9 | Título, "Módulo n de 5", "Conteúdo em preparação", módulo atual destacado e título da aba, nos 5 módulos |
+| V10 | Sequência 1 → 5 por "Próximo" e 5 → 1 por "Anterior"; ausência de "anterior" no Módulo 1 e de "próximo" no Módulo 5 |
+| V11 | Link direto e recarga em `#/modulos` e `#/modulos/sensor-ultrassonico-sonar` |
+| V12 | `scrollWidth` do documento ≤ largura da janela em 360, 390, 768, 1024, 1280 e 1440 px, nas 4 rotas; orientação da lista de módulos |
+| V13 | Contraste entre a cor do texto e a cor de fundo calculadas pelo navegador, em 8 elementos (mínimo de 4,5:1) |
+| V14 | Link de pular (visível, sem sobrepor o cabeçalho, movendo o foco); contorno de foco nos links alcançados por Tab; ativação por Enter |
+| V15 | `window.scrollY` igual a 0 após trocar de módulo com a página rolada |
+| V16 | Nenhum erro no console durante toda a execução |
+| V17 | Rota e slug inexistentes mostram "Página não encontrada" |
+
+**Outra verificação pontual com Playwright, não anexada:** durante a etapa 6, um script curto mediu o `scrollWidth` e gerou capturas da página de módulo. Foi ele que revelou a rolagem horizontal de 699 px (seção 7). A mesma medição foi repetida de forma completa na V12 do script anexado.
+
+### 6.3 Verificações manuais
+
+| Verificação | Como foi feita |
+|-------------|----------------|
+| Inspeção visual (parte da V16) | Leitura, pelo agente, das 9 capturas de tela geradas com Playwright (celular, tablet e desktop), também enviadas ao responsável fora do repositório |
+| Contrastes planejados (seção 5.1 do `TASKS-3.md`) | Cálculo prévio, com uma fórmula WCAG em Python, das combinações de cores propostas, antes da implementação. Depois foram confirmados no navegador (V13) |
+| Fidelidade dos textos ao `AGENTS.md` (D3) | Comparação manual dos textos das páginas com as seções 1 a 3 do `AGENTS.md` |
 
 ## 7. Problemas encontrados durante a implementação
 
@@ -119,3 +155,28 @@ As validações no navegador usaram o Playwright do ambiente do agente, sem adic
 - **`DECISOES-PENDENTES.md`:** continua desatualizado (tarefa à parte).
 - **ESLint obrigatório?** Continua a decisão sobre tornar o ESLint verificação obrigatória no `AGENTS.md`; a Issue #3 já o exigiu e ele passa sem apontamentos.
 - **Publicação no GitHub Pages:** continua fora do escopo.
+
+## 9. Ajustes após a revisão do PR
+
+Em resposta à revisão técnica do responsável no [PR #5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5):
+
+1. **Robustez das funções de sequência** (`src/data/modules.ts`):
+   - `getModulePosition` e `getAdjacentModules` passaram a localizar o módulo pelo `id`, e não pela referência do objeto (`indexOf`).
+   - Comportamento explícito para um módulo desconhecido: `getModulePosition` retorna `undefined` e `getAdjacentModules` retorna `{ previousModule: undefined, nextModule: undefined }`. O `ModulePosition` não exibe o indicador nesse caso.
+   - **Verificação do caso-limite:** `scripts/verify-modules.ts`, executado com `npm run verify:modules`. Usa só o `node:assert` (sem Vitest e sem dependências) e cobre:
+     - as posições dos 5 módulos;
+     - um objeto equivalente criado separadamente;
+     - as extremidades da sequência;
+     - um módulo desconhecido.
+   - O mesmo script, executado contra a versão anterior (`indexOf`), falha: o objeto equivalente recebe a posição `0` em vez de `2`. Isso confirma que a verificação detecta o problema apontado.
+   - **Limitação:** o script depende de o Node.js executar TypeScript diretamente (versão 22.18 ou superior). Ele não entra no `npm run typecheck`, porque a verificação de tipos de arquivos Node exigiria o `@types/node`, que não está aprovado.
+2. **Reprodutibilidade:** a seção 6 foi reescrita, separando os comandos do projeto, a validação pontual com Playwright (script anexado em `docs/relatorios/anexos/`) e as verificações manuais.
+
+Arquivos adicionados ou alterados na revisão:
+- `src/data/modules.ts`
+- `src/components/modules/ModulePosition.tsx`
+- `scripts/verify-modules.ts` (novo)
+- `package.json` (script `verify:modules`)
+- `docs/relatorios/anexos/2026-11-18-issue-3-validacao-navegador.cjs` (novo)
+- este relatório e o `TASKS-3.md`
+
