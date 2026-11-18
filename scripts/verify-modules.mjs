@@ -1,12 +1,25 @@
-// Verificação das funções de sequência dos módulos, sem dependências externas.
-// Uso: npm run verify:modules (requer Node.js >= 22.18, que executa TypeScript removendo os tipos).
+// Verificação das funções de sequência dos módulos (src/data/modules.ts).
+// Uso: npm run verify:modules
+//
+// Funciona em toda a faixa de Node.js declarada no package.json (^20.19.0 || >=22.12.0):
+// em vez de depender da execução nativa de TypeScript pelo Node (disponível só a partir do 22.18),
+// o arquivo é convertido para JavaScript em memória com o pacote "typescript", que já é
+// dependência de desenvolvimento do projeto. Nenhuma dependência adicional é necessária.
+//
+// Limitação: src/data/modules.ts não pode importar outros arquivos locais, pois o módulo
+// convertido é carregado a partir de uma URL "data:".
 import assert from 'node:assert/strict'
-import {
-  educationalModules,
-  getAdjacentModules,
-  getModulePosition,
-  TOTAL_MODULES,
-} from '../src/data/modules.ts'
+import { readFileSync } from 'node:fs'
+import ts from 'typescript'
+
+const modulesSourceUrl = new URL('../src/data/modules.ts', import.meta.url)
+const { outputText } = ts.transpileModule(readFileSync(modulesSourceUrl, 'utf8'), {
+  compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+  fileName: 'modules.ts',
+})
+const { educationalModules, getAdjacentModules, getModulePosition, TOTAL_MODULES } = await import(
+  `data:text/javascript;charset=utf-8,${encodeURIComponent(outputText)}`
+)
 
 const firstModule = educationalModules[0]
 const lastModule = educationalModules[TOTAL_MODULES - 1]
