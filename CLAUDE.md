@@ -10,7 +10,9 @@ As instruções gerais do projeto (contexto, requisitos, restrições, convenç�
 
 - **Siga o fluxo obrigatório de desenvolvimento** (`AGENTS.md`, seção 9) para toda funcionalidade, melhoria ou correção. Não pule etapas e não implemente nada antes da aprovação do `TASKS`.
 - **Nunca realize merge de Pull Requests**, em nenhuma circunstância. O merge é sempre feito pelo responsável.
-- **Siga as regras de Git e GitHub** (`AGENTS.md`, seção 10): branches de funcionalidade nascem da `main`, PRs vão para a `dev`, sem force push, sem commits vazios e sem alterar histórico remoto.
+- **Siga as regras de Git e GitHub** (`AGENTS.md`, seção 10): branches de trabalho (`feat/`, `fix/`, `refactor/`) nascem da `main`, PRs vão para a `dev`, sem force push, sem commits vazios e sem alterar histórico remoto.
+- **Use somente a stack aprovada** (`AGENTS.md`, seção 6) e execute as verificações obrigatórias (`tsc` e build do Vite) antes de dar uma alteração de código como pronta.
+- **Nunca altere configurações do GitHub** (visibilidade, branch padrão, proteção de branches, Pages) nem apague branches sem autorização explícita.
 - **Não execute ações destrutivas sem autorização** (apagar ou sobrescrever arquivos, reescrever histórico do Git, remover conteúdo existente).
 
 ## Forma de trabalho
@@ -27,7 +29,10 @@ As instruções gerais do projeto (contexto, requisitos, restrições, convenç�
 - Mantenha em **inglês** os identificadores de código (`calculateDistance()`, `UltrasonicSensor`, `MAX_DISTANCE`), os nomes de tecnologias e os prefixos convencionais (`feat:`, `fix:`, `docs:`).
 - Detalhes e exemplos: `AGENTS.md`, seção 7.
 
-## Ao concluir uma tarefa
+## Entregas e conclusão de tarefas
 
-- Em tarefas do fluxo completo, apresente o **relatório final** descrito em `AGENTS.md`, seção 9, etapa 8.
-- Em tarefas menores ou fora do fluxo, apresente: resumo, arquivos alterados, validação realizada e resultado, problemas encontrados (mesmo os não resolvidos) e pendências.
+- **Entregue em arquivo Markdown** toda análise, planejamento, rascunho de Issue, `TASKS` ou relatório (`AGENTS.md`, seção 12). No chat, dê apenas uma síntese objetiva com o nome e a localização do arquivo e os principais resultados.
+- Relatórios permanentes vão para `docs/relatorios/` e são versionados; rascunhos e arquivos temporários não são versionados (`AGENTS.md`, seção 12.1).
+- Em tarefas do fluxo completo, o arquivo é o **relatório final** descrito em `AGENTS.md`, seção 9, etapa 8.
+- Em tarefas menores ou fora do fluxo, o arquivo traz: resumo, arquivos alterados, validação realizada e resultado, problemas encontrados (mesmo os não resolvidos) e pendências.
+- Perguntas e esclarecimentos curtos podem ser feitos diretamente no chat, sem arquivo.

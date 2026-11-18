@@ -43,7 +43,7 @@ A plataforma possui **cinco módulos**, apresentados nesta ordem (sequência did
 | 4 | Programação C++ — Espreita vs. Ataque | 6, 7 |
 | 5 | Desafio & Quiz Interativo | 8 |
 
-A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não foi definida** (ver seção 14).
+A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não foi definida** (ver seção 15).
 
 ---
 
@@ -81,21 +81,53 @@ A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não f
 
 ## 6. Decisões e restrições técnicas
 
-- **Hospedagem:** GitHub Pages.
-- **Tipo de aplicação:** estática.
-- **Tecnologias:** HTML, CSS e JavaScript.
+### 6.1 Arquitetura
+
+- **Tipo de aplicação:** estática (SPA gerada em build).
 - **Sem** backend próprio.
 - **Sem** banco de dados.
 - **Sem** autenticação.
 - **Sem** armazenamento individual de progresso.
+- **Hospedagem:** GitHub Pages, com publicação automatizada por GitHub Actions.
 - **Acesso:** individual, pelos dispositivos dos participantes.
 - **Interface:** responsiva.
 
-Implicações:
+### 6.2 Stack aprovada
 
-- O site deve funcionar servido como arquivos estáticos, com **caminhos relativos** (compatíveis com o subdiretório do GitHub Pages).
-- Não introduzir etapa de build, framework ou gerenciador de pacotes sem autorização explícita.
-- Bibliotecas externas (ex.: realce de sintaxe) só quando realmente necessárias e com aprovação; prefira soluções nativas.
+| Finalidade | Tecnologia |
+|------------|------------|
+| Interface | React |
+| Linguagem | TypeScript |
+| Build e servidor de desenvolvimento | Vite |
+| Roteamento | React Router com **`HashRouter`** |
+| Estilos | Tailwind CSS |
+| Ícones | Lucide React |
+| Realce de código C++ | Prism.js |
+| Gerenciador de pacotes | npm (com `package-lock.json` versionado) |
+| Análise estática | ESLint |
+| Testes automatizados | Vitest — **somente** quando houver necessidade justificada, com aprovação |
+
+Qualquer dependência fora desta tabela exige aprovação do responsável (seção 11).
+
+### 6.3 Verificações obrigatórias
+
+Verificações obrigatórias iniciais — antes de considerar qualquer alteração de código pronta, executar com sucesso:
+
+1. Verificação de tipos com TypeScript (`tsc`).
+2. Build de produção do Vite (`npm run build`).
+
+Complementos:
+
+- O **ESLint** é a ferramenta de análise estática do projeto. Quando estiver configurado, deve ser executado e seus apontamentos devem ser tratados ou justificados. Torná-lo verificação obrigatória depende de decisão do responsável.
+- O **Vitest** poderá ser introduzido quando houver necessidade justificada (por exemplo, lógica do simulador do HC-SR04 ou do quiz), mediante aprovação. A partir daí, os testes passam a fazer parte das verificações.
+
+### 6.4 Implicações
+
+- **`HashRouter`** é obrigatório: as rotas usam o formato `.../#/caminho`, evitando erros 404 ao recarregar ou abrir links diretos no GitHub Pages.
+- O `base` do Vite deve ser compatível com o subdiretório do GitHub Pages (`/bagre-robo-maker/`).
+- A validação local da aplicação compilada é feita com `npm run preview`; o `dist/index.html` não funciona aberto diretamente pelo sistema de arquivos.
+- Importar os ícones do Lucide React individualmente, para que apenas os usados entrem no pacote final.
+- Carregar no Prism.js apenas as linguagens necessárias (C++).
 - O Modo Aluno/Professor é apenas uma alternância de visualização no navegador — **não é** controle de acesso.
 - O Tinkercad pode bloquear a incorporação em alguns casos; o link para nova aba é obrigatório em todas as situações.
 
@@ -154,8 +186,9 @@ Outros exemplos de commit:
 - **Não presumir decisões** de produto, pedagógicas, de arquitetura ou de implementação ainda não aprovadas.
 - **Desenvolver incrementalmente**, em entregas pequenas e verificáveis.
 - **Priorizar acessibilidade, responsividade e usabilidade.**
-- **Validar as implementações** antes de considerá-las concluídas (ver seção 13).
+- **Validar as implementações** antes de considerá-las concluídas (ver seções 6.3 e 14).
 - **Seguir a convenção de idioma** (seção 7).
+- **Entregar análises, planejamentos e relatórios em arquivos Markdown** (seção 12).
 - **Commits, push, branches, Issues e Pull Requests** somente nas etapas previstas no fluxo da seção 9, ou quando solicitados pelo responsável.
 
 ---
@@ -189,7 +222,7 @@ Toda nova funcionalidade, melhoria ou correção segue esta sequência. Não pul
 ### Etapa 4 — Planejamento em `TASKS-[numero-da-issue].md`
 
 - Elaborar o documento `TASKS-[numero-da-issue].md`.
-- Apresentá-lo inicialmente como **rascunho**, sem criar ou modificar arquivos na `main`.
+- Apresentá-lo inicialmente como **rascunho** (arquivo `.md` local, não versionado), sem criar ou modificar arquivos na `main`.
 - Escrevê-lo inteiramente em português brasileiro, preservando nomes técnicos e identificadores em inglês.
 - Conteúdo obrigatório:
   1. Referência e objetivo da Issue.
@@ -213,10 +246,16 @@ Após a aprovação do planejamento:
 - Criar a branch **diretamente a partir da `main`**, no padrão:
 
   ```
-  feat/[numero-da-issue]-nome-da-issue
+  [prefixo]/[numero-da-issue]-nome-da-issue
   ```
 
-  O nome descritivo fica em português, sem acentos, com palavras separadas por hífen, preservando o prefixo `feat`. Exemplo: `feat/12-navegacao-entre-modulos`.
+  | Prefixo | Uso |
+  |---------|-----|
+  | `feat/` | Novas funcionalidades e melhorias. |
+  | `fix/` | Correções. |
+  | `refactor/` | Refatorações, sem mudança de comportamento. |
+
+  O nome descritivo fica em português, sem acentos, com palavras separadas por hífen, preservando o prefixo em inglês. Exemplos: `feat/12-navegacao-entre-modulos`, `fix/15-validacao-do-quiz`.
 - Adicionar o `TASKS-[numero-da-issue].md` à nova branch — **nunca** diretamente à `main`.
 - Se a branch `dev` não existir, **perguntar ao responsável** antes de criá-la.
 
@@ -230,7 +269,7 @@ Após a aprovação do planejamento:
 
 ### Etapa 7 — Push e Pull Request
 
-- Enviar a branch de funcionalidade para o repositório remoto.
+- Enviar a branch de trabalho para o repositório remoto.
 - Criar o Pull Request com destino **obrigatório à `dev`**.
 - Título e descrição em português brasileiro, informando o que foi implementado, os testes realizados e a Issue relacionada.
 - Apresentar o PR ao responsável para revisão.
@@ -239,7 +278,7 @@ Após a aprovação do planejamento:
 
 ### Etapa 8 — Relatório final
 
-Ao concluir o trabalho, apresentar um relatório em português brasileiro contendo:
+Ao concluir o trabalho, apresentar um relatório em Markdown (seção 12), em português brasileiro, salvo em `docs/relatorios/` e versionado na própria branch de trabalho, contendo:
 
 - Número e link da Issue.
 - Nome e localização do arquivo `TASKS`.
@@ -255,11 +294,21 @@ Ao concluir o trabalho, apresentar um relatório em português brasileiro conten
 
 ## 10. Regras obrigatórias de Git e GitHub
 
-1. Toda branch de funcionalidade nasce diretamente da `main`.
-2. Todo PR de funcionalidade tem como destino a `dev`.
-3. Nunca realizar merge de PR.
+Organização das branches:
+
+| Branch | Papel |
+|--------|-------|
+| `main` | Branch principal; origem de todas as branches de trabalho e fonte da publicação no GitHub Pages. |
+| `dev` | Branch de integração; destino de todos os Pull Requests. |
+| `feat/`, `fix/`, `refactor/` | Branches de trabalho (ver seção 9, etapa 5). |
+
+Regras:
+
+1. Toda branch de trabalho (`feat/`, `fix/`, `refactor/`) nasce diretamente da `main`.
+2. Todo PR de branch de trabalho tem como destino a `dev`.
+3. Nunca realizar merge de PR. O merge é responsabilidade exclusiva do responsável.
 4. Nunca desenvolver diretamente em `main` ou `dev`.
-5. Nunca criar uma branch de funcionalidade a partir de `dev` ou de outra branch de funcionalidade.
+5. Nunca criar uma branch de trabalho a partir de `dev` ou de outra branch de trabalho.
 6. Nunca fazer force push.
 7. Nunca criar commits vazios.
 8. Nunca alterar o histórico remoto sem autorização.
@@ -286,7 +335,43 @@ Não é necessário pedir aprovação para cada pequena alteração técnica já
 
 ---
 
-## 12. Escopo
+## 12. Formato das entregas
+
+Toda entrega estruturada ou resultado de tarefa é organizado em um **arquivo Markdown (`.md`)**, escrito em português brasileiro (seção 7). Isso inclui:
+
+- Diagnósticos do repositório.
+- Análises técnicas.
+- Propostas de arquitetura.
+- Planejamentos de funcionalidades.
+- Rascunhos de Issues.
+- Documentos `TASKS-[numero-da-issue].md`.
+- Relatórios de execução.
+- Relatórios de testes.
+- Análises de Pull Requests.
+- Documentação técnica.
+
+Regras:
+
+- Ao gerar o arquivo, informar seu **nome e localização**.
+- No chat, apresentar apenas uma **síntese objetiva**: o arquivo gerado e os principais resultados.
+- Mensagens curtas de esclarecimento ou perguntas pontuais não exigem arquivo.
+- Criar ou versionar esses arquivos não autoriza commits ou push fora das etapas do fluxo (seção 9).
+
+### 12.1 Onde ficam os arquivos
+
+| Tipo | Local | Versionado? |
+|------|-------|-------------|
+| Relatórios técnicos **relevantes e permanentes** (diagnósticos, relatórios finais, relatórios de testes, análises de arquitetura, registros de decisões) | `docs/relatorios/` | Sim |
+| `TASKS-[numero-da-issue].md` aprovado | Raiz do repositório, na branch de trabalho (seção 9, etapa 5) | Sim, nunca diretamente na `main` |
+| Rascunhos (Issues, `TASKS` antes da aprovação, propostas em discussão) e arquivos temporários | Fora do repositório ou não adicionados ao Git | Não |
+
+- Nome sugerido para relatórios: `docs/relatorios/AAAA-MM-DD-assunto.md`, em português, sem acentos e com palavras separadas por hífen (ex.: `docs/relatorios/2026-11-18-revisao-da-documentacao.md`).
+- **Não criar relatórios artificiais** apenas para preencher a pasta. Só entra em `docs/relatorios/` o que tiver valor de registro para o projeto.
+- Na dúvida sobre a permanência de um relatório, perguntar ao responsável.
+
+---
+
+## 13. Escopo
 
 **Dentro do escopo:** tudo o que está descrito nas seções 3 a 6.
 
@@ -300,25 +385,25 @@ Não é necessário pedir aprovação para cada pequena alteração técnica já
 
 ---
 
-## 13. Critérios de conclusão
+## 14. Critérios de conclusão
 
 Uma tarefa só é considerada concluída quando:
 
 1. Atende ao requisito e aos critérios de aceitação da Issue, sem extrapolar o escopo.
-2. Funciona como site estático aberto localmente e é compatível com o GitHub Pages (caminhos relativos, sem dependência de servidor).
+2. Passa nas verificações obrigatórias (seção 6.3: `tsc` e build do Vite) e funciona em `npm run preview`, de forma compatível com o GitHub Pages (`HashRouter` e `base` corretos, sem dependência de servidor).
 3. Foi verificada em larguras de tela de celular e de computador, sem rolagem horizontal indevida.
 4. Pode ser usada por teclado, com foco visível e rótulos adequados.
 5. Não gera erros no console do navegador.
 6. Respeita a convenção de idioma (seção 7).
 7. Não contém informações técnicas inventadas; pendências estão marcadas e foram comunicadas.
 8. Não quebra funcionalidades já existentes.
-9. O `TASKS` está atualizado, o PR para a `dev` foi aberto e o relatório final foi apresentado (seção 9).
+9. O `TASKS` está atualizado, o PR para a `dev` foi aberto e o relatório final foi apresentado em Markdown (seções 9 e 12).
 
 A **plataforma** é considerada concluída quando os cinco módulos e todos os requisitos RF01–RF11 estiverem implementados e validados segundo os critérios acima, e o site estiver publicado no GitHub Pages.
 
 ---
 
-## 14. Informações pendentes
+## 15. Informações pendentes
 
 Itens que ainda precisam ser fornecidos ou definidos pela equipe. Não presuma valores para eles.
 
@@ -331,3 +416,10 @@ Itens que ainda precisam ser fornecidos ou definidos pela equipe. Não presuma v
 - Diferenças de conteúdo entre Modo Aluno e Modo Professor.
 - Distribuição de tempo entre os módulos na aula de 90 minutos.
 - Imagens, fotos e identidade visual (cores, logotipo).
+
+Pendências de infraestrutura (decisões do responsável):
+
+- O repositório continua **privado**. Qualquer mudança de visibilidade só ocorre após auditoria do conteúdo, conduzida pelo responsável.
+- O responsável verificará se o plano do GitHub permite o GitHub Pages em repositório privado.
+- Criação das branches `main` (a partir do commit atualizado da documentação) e `dev` (a partir da `main`): autorizada, a ser executada mediante nova orientação.
+- Alteração da branch padrão para `main`, proteção de branches e configuração do Pages com origem "GitHub Actions": a cargo do responsável, nas configurações do GitHub.
