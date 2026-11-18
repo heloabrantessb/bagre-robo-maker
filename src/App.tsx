@@ -1,7 +1,7 @@
 function App() {
   return (
-    <main>
-      <h1>Bagre Robô Maker</h1>
+    <main className="mx-auto max-w-3xl px-4 py-8">
+      <h1 className="text-3xl font-bold">Bagre Robô Maker</h1>
     </main>
   )
 }

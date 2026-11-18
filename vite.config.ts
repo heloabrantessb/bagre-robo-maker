@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
@@ -5,5 +6,5 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   // Caminho de publicação no GitHub Pages: https://<usuario>.github.io/bagre-robo-maker/
   base: '/bagre-robo-maker/',
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
 })
