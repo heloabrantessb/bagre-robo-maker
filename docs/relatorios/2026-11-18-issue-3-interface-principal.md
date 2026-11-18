@@ -9,7 +9,7 @@
 | Issue | [#3 — Implementar interface principal e navegação entre módulos](https://github.com/heloabrantessb/bagre-robo-maker/issues/3) |
 | Planejamento | `TASKS-3.md`, aprovado em 18/11/2026. Retirado do repositório depois da integração; o conteúdo final está no histórico do Git (commit `4ecee67`) |
 | Branch | `feat/3-interface-principal-e-navegacao`, criada a partir de `main` (`713884b`) |
-| Pull Request | [#5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5), com destino à `dev`, aguardando revisão (sem merge pelo agente) |
+| Pull Request | [#5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5), com destino à `dev`. **Integrado** pelo responsável (ver "Atualização histórica" ao final) |
 
 ## 2. Resumo
 
@@ -192,3 +192,11 @@ Arquivos adicionados ou alterados na revisão:
 - `docs/relatorios/anexos/2026-11-18-issue-3-validacao-navegador.cjs` (novo)
 - este relatório e o `TASKS-3.md`
 
+## Atualização histórica
+
+Registro adicionado depois da conclusão, para que este relatório não seja lido como status atual. Os horários estão em UTC.
+
+| Data | Evento |
+|------|--------|
+| 18/11/2026, 21:18 | [PR #5](https://github.com/heloabrantessb/bagre-robo-maker/pull/5) integrado à `dev` pelo responsável |
+| 18/11/2026, 21:19 | `dev` integrada à `main` pelo [PR #6](https://github.com/heloabrantessb/bagre-robo-maker/pull/6) (commit `b2dcf7c`) |
