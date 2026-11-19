@@ -43,9 +43,9 @@ src/
 ├── App.tsx            # componente raiz (layout + rotas)
 ├── routes/            # definição das rotas
 ├── pages/             # uma página por rota
-├── components/        # componentes compartilhados (layout/ e modules/)
+├── components/        # componentes compartilhados (layout/, home/ e modules/)
 ├── hooks/             # hooks React (ex.: passo em leitura na página de módulo)
-├── data/              # dados estáticos tipados (módulos, cores e passos)
+├── data/              # dados estáticos tipados (módulos, cores, objetivos e passos)
 ├── styles/            # CSS global com Tailwind CSS
 └── assets/            # imagens e recursos importados pelo código
 public/                # arquivos estáticos copiados sem processamento
@@ -58,8 +58,8 @@ A aplicação usa `HashRouter`, portanto as rotas ficam após `#` na URL (ex.: `
 
 | Rota | Página |
 |------|--------|
-| `#/` | Visão geral: apresentação, objetivos da aula e acesso aos módulos |
-| `#/modulos` | Lista dos cinco módulos |
+| `#/` | Início: apresentação da aula e "O circuito da aula", com os cinco módulos em ordem e seus objetivos |
+| `#/modulos` | Redireciona para o início (endereço antigo da lista de módulos) |
 | `#/modulos/<slug>` | Página do módulo: barra lateral de passos e um título (h2) por passo; conteúdo didático ainda em preparação |
 | qualquer outra | Página não encontrada |
 
