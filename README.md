@@ -23,6 +23,18 @@ As instruções completas do projeto (escopo, stack, fluxo de trabalho e conven�
 
 Para validar o build, use `npm run preview`. Abrir `dist/index.html` diretamente pelo sistema de arquivos não funciona.
 
+## Publicação
+
+O site é publicado no GitHub Pages em **https://heloabrantessb.github.io/bagre-robo-maker/** pelo workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
+
+| Evento | O que acontece |
+|--------|----------------|
+| Pull Request para `dev` ou `main` | `typecheck`, `lint`, `verify:modules` e `build` no Node.js 20.19 e 22, **sem publicar** |
+| Push na `main` (merge da `dev`) | As mesmas verificações, build e **publicação** |
+| Disparo manual (*Actions → Publicação no GitHub Pages → Run workflow*, na `main`) | Verificações, build e publicação |
+
+Pré-requisito: em *Settings → Pages → Build and deployment → Source*, a origem deve ser **GitHub Actions**. Com "Deploy from a branch", o GitHub publica os arquivos sem build e a página fica em branco.
+
 ## Estrutura
 
 ```
