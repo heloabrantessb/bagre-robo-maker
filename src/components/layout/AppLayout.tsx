@@ -1,7 +1,7 @@
 import { Fish } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
 import { Link } from 'react-router'
-import { MainNavigation } from './MainNavigation.tsx'
+import { ModuleTrail } from '../modules/ModuleTrail.tsx'
 import { ScrollToTop } from './ScrollToTop.tsx'
 
 const MAIN_CONTENT_ID = 'conteudo-principal'
@@ -30,35 +30,28 @@ export function AppLayout({ children }: AppLayoutProps) {
         Pular para o conteúdo
       </a>
 
-      <header className="bg-brand text-white">
-        <div className="mx-auto flex max-w-6xl items-center px-4 py-3 sm:py-4">
+      <header className="border-b border-hole bg-white">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-10 gap-y-3 px-4 py-3">
           <Link
             to="/"
-            className="flex items-center gap-3 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="flex items-center gap-2.5 rounded-lg text-ink focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-rail-minus"
           >
-            <Fish aria-hidden="true" className="size-8 shrink-0" />
-            <span className="flex flex-col leading-tight sm:flex-row sm:items-baseline sm:gap-2">
-              <span className="text-lg font-bold sm:text-xl">Bagre Robô Maker</span>
-              <span aria-hidden="true" className="hidden text-white/70 sm:inline">
-                —
-              </span>
-              <span className="text-sm text-white/90 sm:text-base">Plataforma Educacional</span>
+            <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-lg bg-brand text-white">
+              <Fish className="size-6" />
             </span>
+            <span className="font-display text-xl font-extrabold tracking-tight">Bagre Robô Maker</span>
           </Link>
+          <div className="min-w-0 flex-[1_1_20rem]">
+            <ModuleTrail />
+          </div>
         </div>
       </header>
 
-      <MainNavigation />
-
-      <main
-        id={MAIN_CONTENT_ID}
-        tabIndex={-1}
-        className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 focus:outline-none sm:py-8"
-      >
+      <main id={MAIN_CONTENT_ID} tabIndex={-1} className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 focus:outline-none sm:py-8">
         {children}
       </main>
 
-      <footer className="border-t border-line bg-white">
+      <footer className="border-t border-hole bg-white">
         <p className="mx-auto max-w-6xl px-4 py-4 text-sm text-slate-600">
           Bagre Robô Maker — plataforma de apoio à aula guiada.
         </p>

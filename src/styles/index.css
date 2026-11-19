@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
-/* Identidade visual do Bagre Robô Maker (cores amostradas da referência aprovada). */
+/* Identidade visual "protoboard" do Bagre Robô Maker. */
 @theme {
+  --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+
   --color-brand: #18684b;
   --color-brand-strong: #12553d;
   --color-brand-soft: #e3f1ea;
@@ -10,10 +13,26 @@
   --color-ink-soft: #2c3b4b;
   --color-surface-muted: #eff1f3;
   --color-line: #dfe1e5;
+
+  /* Base de protoboard: placa, furos e trilhas de alimentação. */
+  --color-plate: #f4f6f5;
+  --color-board: #e9eeec;
+  --color-hole: #c9d2ce;
+  --color-rail-plus: #c2362f;
+  --color-rail-minus: #2457a6;
 }
 
 @layer base {
   body {
-    @apply bg-surface-muted text-ink antialiased;
+    @apply bg-plate font-sans text-ink antialiased;
+  }
+}
+
+@layer components {
+  /* Grade de furos da protoboard (decorativa). */
+  .protoboard {
+    background-color: var(--color-board);
+    background-image: radial-gradient(circle, var(--color-hole) 1.6px, transparent 1.8px);
+    background-size: 18px 18px;
   }
 }

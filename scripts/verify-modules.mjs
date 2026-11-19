@@ -17,7 +17,7 @@ const { outputText } = ts.transpileModule(readFileSync(modulesSourceUrl, 'utf8')
   compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
   fileName: 'modules.ts',
 })
-const { educationalModules, getAdjacentModules, getModulePosition, TOTAL_MODULES } = await import(
+const { educationalModules, getAdjacentModules, getModulePosition, getStepElementId, TOTAL_MODULES } = await import(
   `data:text/javascript;charset=utf-8,${encodeURIComponent(outputText)}`
 )
 
@@ -55,5 +55,26 @@ assert.deepEqual(getAdjacentModules(unknownModule), {
   previousModule: undefined,
   nextModule: undefined,
 })
+
+// Cores e passos de cada módulo.
+const hexColor = /^#[0-9a-f]{6}$/i
+const stepId = /^[a-z0-9]+(-[a-z0-9]+)*$/
+const elementIds = new Set()
+educationalModules.forEach((educationalModule) => {
+  const { fill, onFill, accent, wire } = educationalModule.colors
+  ;[fill, onFill, accent, wire].forEach((color) => assert.match(color, hexColor))
+  assert.ok(educationalModule.steps.length > 0, `Módulo ${educationalModule.id} sem passos`)
+  const ids = educationalModule.steps.map((step) => step.id)
+  assert.equal(new Set(ids).size, ids.length, `Passos repetidos no módulo ${educationalModule.id}`)
+  educationalModule.steps.forEach((step) => {
+    assert.match(step.id, stepId)
+    assert.ok(step.title.trim().length > 0)
+    elementIds.add(getStepElementId(educationalModule, step))
+  })
+})
+// Os ids HTML dos passos são únicos em toda a plataforma.
+const totalSteps = educationalModules.reduce((sum, educationalModule) => sum + educationalModule.steps.length, 0)
+assert.equal(elementIds.size, totalSteps)
+assert.equal(getStepElementId({ id: 1 }, { id: 'o-que-e-biomimetica' }), 'modulo-1-passo-o-que-e-biomimetica')
 
 console.log('verify:modules — todas as verificações passaram.')
