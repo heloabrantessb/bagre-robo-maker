@@ -11,7 +11,7 @@ As instruções gerais do projeto (contexto, requisitos, restrições, convenç�
 - **Siga o fluxo obrigatório de desenvolvimento** (`AGENTS.md`, seção 9) para toda funcionalidade, melhoria ou correção. Não pule etapas e não implemente nada antes da aprovação do `TASKS`.
 - **Nunca realize merge de Pull Requests**, em nenhuma circunstância. O merge é sempre feito pelo responsável.
 - **Siga as regras de Git e GitHub** (`AGENTS.md`, seção 10): branches de trabalho (`feat/`, `fix/`, `refactor/`, `docs/`) nascem da `main`, PRs vão para a `dev`, sem force push, sem commits vazios e sem alterar histórico remoto.
-- **Use somente a stack aprovada** (`AGENTS.md`, seção 6) e execute as verificações obrigatórias (`tsc` e build do Vite) antes de dar uma alteração de código como pronta.
+- **Use somente a stack aprovada** (`AGENTS.md`, seção 6) e execute as verificações obrigatórias (`tsc`, ESLint e build do Vite) antes de dar uma alteração de código como pronta, e confira o resultado do workflow no PR.
 - **Nunca altere configurações do GitHub** (visibilidade, branch padrão, proteção de branches, Pages) nem apague branches sem autorização explícita.
 - **Não execute ações destrutivas sem autorização** (apagar ou sobrescrever arquivos, reescrever histórico do Git, remover conteúdo existente).
 

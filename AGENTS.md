@@ -111,14 +111,15 @@ Qualquer dependência fora desta tabela exige aprovação do responsável (seç�
 
 ### 6.3 Verificações obrigatórias
 
-Verificações obrigatórias iniciais — antes de considerar qualquer alteração de código pronta, executar com sucesso:
+Antes de considerar qualquer alteração de código pronta, executar com sucesso:
 
-1. Verificação de tipos com TypeScript (`tsc`).
-2. Build de produção do Vite (`npm run build`).
+1. Verificação de tipos com TypeScript (`npm run typecheck`).
+2. Análise estática com ESLint (`npm run lint`), obrigatória desde a Issue #9.
+3. Build de produção do Vite (`npm run build`).
 
 Complementos:
 
-- O **ESLint** é a ferramenta de análise estática do projeto. Quando estiver configurado, deve ser executado e seus apontamentos devem ser tratados ou justificados. Torná-lo verificação obrigatória depende de decisão do responsável.
+- O workflow de publicação (`.github/workflows/deploy.yml`) executa essas verificações e o `npm run verify:modules` no Node.js 20.19 e 22, em todo Pull Request para a `dev` ou a `main` e antes de cada publicação. Um PR com o workflow falhando não está pronto para revisão.
 - O **Vitest** poderá ser introduzido quando houver necessidade justificada (por exemplo, lógica do simulador do HC-SR04 ou do quiz), mediante aprovação. A partir daí, os testes passam a fazer parte das verificações.
 
 ### 6.4 Implicações
@@ -128,6 +129,7 @@ Complementos:
 - A validação local da aplicação compilada é feita com `npm run preview`; o `dist/index.html` não funciona aberto diretamente pelo sistema de arquivos.
 - Importar os ícones do Lucide React individualmente, para que apenas os usados entrem no pacote final.
 - Carregar no Prism.js apenas as linguagens necessárias (C++).
+- A publicação é feita pelo workflow `.github/workflows/deploy.yml`, apenas a partir da `main` (push ou disparo manual). O GitHub Pages precisa estar configurado com a origem "GitHub Actions"; a origem "Deploy from a branch" publica os arquivos sem build e o site fica em branco.
 - O Modo Aluno/Professor é apenas uma alternância de visualização no navegador — **não é** controle de acesso.
 - O Tinkercad pode bloquear a incorporação em alguns casos; o link para nova aba é obrigatório em todas as situações.
 
@@ -391,7 +393,7 @@ Regras:
 Uma tarefa só é considerada concluída quando:
 
 1. Atende ao requisito e aos critérios de aceitação da Issue, sem extrapolar o escopo.
-2. Passa nas verificações obrigatórias (seção 6.3: `tsc` e build do Vite) e funciona em `npm run preview`, de forma compatível com o GitHub Pages (`HashRouter` e `base` corretos, sem dependência de servidor).
+2. Passa nas verificações obrigatórias (seção 6.3: `tsc`, ESLint e build do Vite), localmente e no workflow do PR, e funciona em `npm run preview`, de forma compatível com o GitHub Pages (`HashRouter` e `base` corretos, sem dependência de servidor).
 3. Foi verificada em larguras de tela de celular e de computador, sem rolagem horizontal indevida.
 4. Pode ser usada por teclado, com foco visível e rótulos adequados.
 5. Não gera erros no console do navegador.

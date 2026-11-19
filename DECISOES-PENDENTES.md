@@ -2,7 +2,7 @@
 
 Registro das decisões de infraestrutura e de processo que dependem do responsável.
 
-**Última atualização:** 18/11/2026, após o merge da `dev` na `main` (PR #6).
+**Última atualização:** 19/11/2026, durante a Issue #9 (publicação no GitHub Pages).
 
 > A análise original de cada questão (opções, consequências e passos) está no histórico do Git deste arquivo, no commit `186861a`.
 
@@ -12,13 +12,13 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 |------|--------|
 | Visibilidade | **Público** |
 | Branch padrão | `main` |
-| `main` | `b2dcf7c`, com o mesmo conteúdo da `dev` |
-| `dev` | `614831a` (merge do PR #5) |
-| Issues | #1 e #3 fechadas e integradas |
+| `main` | `d182873`, com o mesmo conteúdo da `dev` |
+| `dev` | `7322438` (merge do PR #7) |
+| Issues | #1 e #3 fechadas e integradas; #9 (publicação) em andamento |
 | Branches já integradas | `claude/laughing-einstein-6xy9bf`, `feat/1-estrutura-inicial-do-projeto`, `feat/3-interface-principal-e-navegacao` |
 | Proteção de branches | Nenhuma (`main` e `dev` sem proteção) |
-| GitHub Pages | **Não configurado** |
-| GitHub Actions | Nenhum workflow |
+| GitHub Pages | Ativado com a origem **"Deploy from a branch"**: publica os arquivos sem build e o site fica **em branco** (ver P1) |
+| GitHub Actions | Workflow `.github/workflows/deploy.yml` em revisão na Issue #9; na `main`, só a execução automática "pages build and deployment" |
 
 ## 2. Decisões resolvidas
 
@@ -31,34 +31,36 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 | B | Local dos relatórios | `docs/relatorios/`, versionando só os relatórios relevantes e permanentes (`AGENTS.md`, seção 12.1). |
 | C | Prefixos de branch | `feat/`, `fix/`, `refactor/` e `docs/` (este último aprovado em 18/11/2026), sempre a partir da `main`, com PR para a `dev` (`AGENTS.md`, seções 9 e 10). |
 | E | Versionamento dos `TASKS-[n].md` | **Opção A** (18/11/2026): o `TASKS` fica só local e é ignorado pelo Git (`TASKS-*.md` no `.gitignore`); o registro permanente fica no relatório final. O `TASKS-1.md` e o `TASKS-3.md` foram retirados; o conteúdo está no histórico do Git (`d2c8872` e `4ecee67`). |
-| D | Stack e verificações | Stack aprovada e verificações obrigatórias `tsc` e build (`AGENTS.md`, seção 6). |
+| D | Stack e verificações | Stack aprovada e verificações obrigatórias `tsc`, ESLint e build (`AGENTS.md`, seção 6). |
+| G | `verify:modules` no Node.js 20.19 (antiga P8) | **Confirmado** (19/11/2026): o job "Verificações e build (Node.js 20.19)" do workflow passou no PR #10, incluindo o `npm run verify:modules`. |
+| F | ESLint obrigatório (antiga P5) | **Sim** (19/11/2026, Issue #9): `npm run lint` obrigatório e executado pelo workflow em todo PR (`AGENTS.md`, seções 6.3 e 14). |
 
 ## 3. Pendências
 
 | # | Pendência | Quem executa | Bloqueia |
 |---|-----------|--------------|----------|
-| P1 | Ativar o GitHub Pages com origem "GitHub Actions" | Responsável | Publicação do site |
-| P2 | Criar o workflow de publicação | Claude Code, numa Issue própria | Publicação do site |
+| P1 | Trocar a origem do GitHub Pages para "GitHub Actions" | Responsável | Publicação do site |
+| P2 | Workflow de publicação | Claude Code (Issue #9, em revisão) | Publicação do site |
 | P3 | Proteger as branches `main` e `dev` | Responsável | Nada (recomendado) |
 | P4 | Apagar as branches já integradas | Responsável | Nada (opcional) |
-| P5 | Tornar o ESLint verificação obrigatória? | Responsável | Nada |
 | P6 | Atualizar o `AGENTS.md` com a visibilidade pública | Responsável decide; Claude Code executa | Nada |
 | P7 | Local deste arquivo | Responsável | Nada |
-| P8 | Confirmar o `verify:modules` no Node 20.19 | Responsável ou Claude Code | Nada |
 | P9 | Atualização do TypeScript 7 | Responsável | Nada |
 | P10 | Conteúdo dos módulos | Equipe do projeto | Issues de conteúdo |
 
-### P1 — Ativar o GitHub Pages
+### P1 — Trocar a origem do GitHub Pages
 
-- **O que fazer:** em *Settings → Pages → Build and deployment → Source*, selecionar **GitHub Actions**.
-- **Por quê:** a publicação será feita por um workflow que gera o build do Vite e publica a pasta `dist/`. Sem essa configuração, a etapa de deploy falha.
-- **Resultado esperado:** o site ficará em `https://heloabrantessb.github.io/bagre-robo-maker/`, compatível com o `base: '/bagre-robo-maker/'` já configurado.
+- **Situação:** o Pages foi ativado com a origem **"Deploy from a branch"** (execução automática "pages build and deployment" sobre o commit `d182873` da `main`). Nesse modo, o GitHub publica os arquivos do repositório **sem build**. O `index.html` de desenvolvimento carrega `/src/main.tsx`, que não existe no endereço publicado e só funciona depois do build do Vite. Resultado: página em branco.
+- **O que fazer:** em *Settings → Pages → Build and deployment → Source*, trocar para **GitHub Actions**, antes do merge da Issue #9 na `main`.
+- **Resultado esperado:** com a origem certa e o workflow na `main`, o site fica em `https://heloabrantessb.github.io/bagre-robo-maker/`.
 
 ### P2 — Workflow de publicação
 
-- **O que fazer:** abrir uma Issue para criar `.github/workflows/deploy.yml`, disparado a cada push na `main` e também manualmente. O workflow roda `npm ci`, `npm run build`, envia o `dist/` e publica com `actions/deploy-pages`.
-- **Depende de:** P1 para a validação final.
-- **Observação:** com o workflow, cada merge da `dev` na `main` passa a atualizar o site automaticamente.
+- **Situação:** implementado na Issue #9 (`.github/workflows/deploy.yml`), em revisão.
+- **Como funciona:**
+  - nos PRs para a `dev` e a `main`: verificações e build no Node.js 20.19 e 22, sem publicar;
+  - no push na `main` e no disparo manual: verificações, build e publicação.
+- **Depende de:** P1, para a publicação funcionar depois do merge na `main`.
 
 ### P3 — Proteção de branches
 
@@ -73,12 +75,6 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 - **Branches:** `claude/laughing-einstein-6xy9bf`, `feat/1-estrutura-inicial-do-projeto` e `feat/3-interface-principal-e-navegacao`. Todo o conteúdo delas já está na `main`.
 - **O que fazer:** o responsável pode apagá-las no GitHub. Isso é opcional, e o Claude Code não apaga branches sem autorização.
 
-### P5 — ESLint como verificação obrigatória
-
-- **Situação:** a seção 6.3 do `AGENTS.md` define como obrigatórias só o `tsc` e o build. O ESLint fica a critério do responsável.
-- **Na prática:** a Issue #3 já exigiu o `npm run lint` nos critérios de aceite, e o projeto passa sem apontamentos.
-- **O que decidir:** se o `npm run lint` passa a ser obrigatório. Se sim, atualizar o `AGENTS.md`, seções 6.3 e 14.
-
 ### P6 — Visibilidade no `AGENTS.md`
 
 - **Situação:** a seção 15 do `AGENTS.md` ainda diz que o repositório "continua **privado**" e que haveria auditoria antes de qualquer mudança de visibilidade. O repositório agora é público.
@@ -90,11 +86,6 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 - **O que decidir:**
   - mantê-lo na raiz, como documento vivo de pendências; ou
   - movê-lo para `docs/relatorios/`.
-
-### P8 — `verify:modules` no Node 20.19
-
-- **Situação:** o `npm run verify:modules` foi validado no Node 22.23.5, com e sem a execução de TypeScript. Isso simula o Node 20.19 e o 22.12 a 22.17, mas o script não foi executado num Node 20.19 real.
-- **O que fazer (opcional):** rodar `npm run verify:modules` num Node 20.19 para confirmar.
 
 ### P9 — TypeScript 7
 
@@ -116,7 +107,7 @@ Itens listados no `AGENTS.md`, seção 15:
 
 ## 4. Próximos passos sugeridos
 
-1. Ativar o Pages (P1) e abrir a Issue do workflow de publicação (P2), para que a plataforma fique acessível aos participantes.
+1. Trocar a origem do Pages para "GitHub Actions" (P1) e integrar a Issue #9 (P2), para que a plataforma fique acessível aos participantes.
 2. Proteger a `main` e a `dev` (P3).
-3. Decidir P5, P6 e P7 e atualizar a documentação numa única tarefa.
+3. Decidir P6 e P7 e atualizar a documentação numa única tarefa.
 4. Fornecer o conteúdo dos módulos (P10) para as próximas Issues.
