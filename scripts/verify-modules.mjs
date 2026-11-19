@@ -56,13 +56,15 @@ assert.deepEqual(getAdjacentModules(unknownModule), {
   nextModule: undefined,
 })
 
-// Cores e passos de cada módulo.
+// Cores, objetivos e passos de cada módulo.
 const hexColor = /^#[0-9a-f]{6}$/i
 const stepId = /^[a-z0-9]+(-[a-z0-9]+)*$/
 const elementIds = new Set()
 educationalModules.forEach((educationalModule) => {
   const { fill, onFill, accent, wire } = educationalModule.colors
   ;[fill, onFill, accent, wire].forEach((color) => assert.match(color, hexColor))
+  assert.ok(educationalModule.objectives.length > 0, `Módulo ${educationalModule.id} sem objetivos`)
+  educationalModule.objectives.forEach((objective) => assert.ok(objective.trim().length > 0))
   assert.ok(educationalModule.steps.length > 0, `Módulo ${educationalModule.id} sem passos`)
   const ids = educationalModule.steps.map((step) => step.id)
   assert.equal(new Set(ids).size, ids.length, `Passos repetidos no módulo ${educationalModule.id}`)

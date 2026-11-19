@@ -34,7 +34,7 @@ export function StepRail({ educationalModule, currentIndex, onSelectStep, varian
       {isSidebar && (
         <>
           <Link
-            to="/modulos"
+            to="/"
             className="inline-flex min-h-11 items-center rounded-xl border border-hole bg-white px-4 font-semibold text-ink hover:border-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-rail-minus"
           >
             Todos os módulos
