@@ -8,7 +8,7 @@
 |-------|-------|
 | Issue | [#9 — Publicar a plataforma no GitHub Pages com GitHub Actions](https://github.com/heloabrantessb/bagre-robo-maker/issues/9) |
 | Branch | `feat/9-publicacao-github-pages`, criada a partir da `main` (`d182873`) |
-| Pull Request | Aberto para a `dev` (link registrado na seção 8) |
+| Pull Request | [#10](https://github.com/heloabrantessb/bagre-robo-maker/pull/10), com destino à `dev`, aguardando revisão (sem merge pelo agente) |
 | Planejamento | `TASKS-9.md`, local e não versionado (`AGENTS.md`, seção 12.1); resumo na seção 2 |
 
 ## 2. Resumo do planejamento aprovado
@@ -97,13 +97,23 @@ Nenhuma dependência nova e nenhuma alteração na aplicação.
 | V1 | Sintaxe e estrutura do workflow | Leitura com PyYAML, já disponível no ambiente, conferindo gatilhos, permissões, matriz, condições e etapas | OK |
 | V1b | Entradas das ações | Leitura do `action.yml` das versões `checkout` v7.0.1, `setup-node` v7.1.0, `upload-pages-artifact` v5.0.0 e `deploy-pages` v5.0.1 | OK |
 | V2 | Comandos do projeto (Node.js 22.23.5 local) | `npm ci`, `npm run typecheck`, `npm run lint`, `npm run verify:modules`, `npm run build` | OK; `dist/` com `index.html`, `assets/` e `favicon.svg` |
-| V3 | Job de build no GitHub (Node.js 20.19 e 22) | Execução disparada pelo próprio PR | Registrado na seção 8 |
+| V3 | Job de build no GitHub (Node.js 20.19 e 22) | Execução disparada pelo próprio PR | OK (seção 8) |
 | V4 | Publicação | Execução no push da `main`, depois do merge pelo responsável | Pendente (seção 9) |
 | V5 | Site publicado | Rotas, link direto, recarga, rota inexistente e console | Pendente (seção 9) |
 
 ## 8. Resultado no Pull Request
 
-*(Preenchido depois da execução do workflow no PR.)*
+Execução [44449853610](https://github.com/heloabrantessb/bagre-robo-maker/actions/runs/44449853610), disparada pelo PR #10 no commit `3847442`, em 19/11/2026:
+
+| Job | Resultado | Duração |
+|-----|-----------|---------|
+| Verificações e build (Node.js 20.19) | ✅ sucesso | 20 s |
+| Verificações e build (Node.js 22) | ✅ sucesso | 24 s |
+| Publicar no GitHub Pages | ⏭️ pulado, como esperado em PR | — |
+
+- Nos dois jobs, todas as etapas passaram: obter o código, configurar o Node.js, `npm ci`, `typecheck`, `lint`, `verify:modules` e `build`.
+- A etapa "Enviar o build como artefato do Pages" foi **pulada**, como esperado fora da `main`.
+- **Pendência P8 resolvida:** o `npm run verify:modules` e as demais verificações passaram num **Node.js 20.19 real**, no runner do GitHub.
 
 ## 9. Pendências e limitações
 

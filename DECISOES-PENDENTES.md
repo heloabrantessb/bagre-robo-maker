@@ -32,6 +32,7 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 | C | Prefixos de branch | `feat/`, `fix/`, `refactor/` e `docs/` (este último aprovado em 18/11/2026), sempre a partir da `main`, com PR para a `dev` (`AGENTS.md`, seções 9 e 10). |
 | E | Versionamento dos `TASKS-[n].md` | **Opção A** (18/11/2026): o `TASKS` fica só local e é ignorado pelo Git (`TASKS-*.md` no `.gitignore`); o registro permanente fica no relatório final. O `TASKS-1.md` e o `TASKS-3.md` foram retirados; o conteúdo está no histórico do Git (`d2c8872` e `4ecee67`). |
 | D | Stack e verificações | Stack aprovada e verificações obrigatórias `tsc`, ESLint e build (`AGENTS.md`, seção 6). |
+| G | `verify:modules` no Node.js 20.19 (antiga P8) | **Confirmado** (19/11/2026): o job "Verificações e build (Node.js 20.19)" do workflow passou no PR #10, incluindo o `npm run verify:modules`. |
 | F | ESLint obrigatório (antiga P5) | **Sim** (19/11/2026, Issue #9): `npm run lint` obrigatório e executado pelo workflow em todo PR (`AGENTS.md`, seções 6.3 e 14). |
 
 ## 3. Pendências
@@ -44,7 +45,6 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 | P4 | Apagar as branches já integradas | Responsável | Nada (opcional) |
 | P6 | Atualizar o `AGENTS.md` com a visibilidade pública | Responsável decide; Claude Code executa | Nada |
 | P7 | Local deste arquivo | Responsável | Nada |
-| P8 | Confirmar o `verify:modules` no Node 20.19 | Workflow da Issue #9 (Node.js 20.19 na matriz) | Nada |
 | P9 | Atualização do TypeScript 7 | Responsável | Nada |
 | P10 | Conteúdo dos módulos | Equipe do projeto | Issues de conteúdo |
 
@@ -86,11 +86,6 @@ Registro das decisões de infraestrutura e de processo que dependem do responsá
 - **O que decidir:**
   - mantê-lo na raiz, como documento vivo de pendências; ou
   - movê-lo para `docs/relatorios/`.
-
-### P8 — `verify:modules` no Node 20.19
-
-- **Situação:** o `npm run verify:modules` foi validado no Node 22.23.5, com e sem a execução de TypeScript. Isso simula o Node 20.19 e o 22.12 a 22.17, mas o script não foi executado num Node 20.19 real.
-- **Encaminhamento:** o workflow da Issue #9 roda o `verify:modules` (e as demais verificações) num Node.js 20.19 real em todo PR. A pendência fica resolvida quando esse job passar.
 
 ### P9 — TypeScript 7
 
