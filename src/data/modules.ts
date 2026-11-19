@@ -20,6 +20,8 @@ export interface EducationalModule {
   slug: string
   title: string
   colors: ModuleColors
+  // Objetivos educacionais do módulo, conforme AGENTS.md, seções 2 e 3 (redação curta).
+  objectives: readonly string[]
   steps: readonly ModuleStep[]
 }
 
@@ -40,6 +42,7 @@ export const educationalModules: readonly EducationalModule[] = [
     slug: 'biomimetica-garrafa-pet',
     title: 'Biomimética & Garrafa PET',
     colors: { fill: '#2e7d32', onFill: '#ffffff', accent: '#2e7d32', wire: '#2e7d32' },
+    objectives: ['Conceitos de biomimética', 'Construção do corpo com garrafa PET'],
     // Títulos dos passos conforme o design de referência aprovado pelo responsável.
     steps: [
       { id: 'o-que-e-biomimetica', title: 'O que é biomimética?' },
@@ -52,6 +55,7 @@ export const educationalModules: readonly EducationalModule[] = [
     slug: 'eletronica-transistor-c1815',
     title: 'Eletrônica & Transistor C1815',
     colors: { fill: '#f2c94c', onFill: '#1f2c3a', accent: '#7a5c00', wire: '#d4a106' },
+    objectives: ['Circuitos eletrônicos do robô', 'Funcionamento do transistor C1815'],
     steps: pendingSteps(2),
   },
   {
@@ -59,6 +63,7 @@ export const educationalModules: readonly EducationalModule[] = [
     slug: 'sensor-ultrassonico-sonar',
     title: 'Sensor Ultrassônico & Sonar',
     colors: { fill: '#2457a6', onFill: '#ffffff', accent: '#2457a6', wire: '#2457a6' },
+    objectives: ['Princípios do sensor ultrassônico HC-SR04'],
     steps: pendingSteps(3),
   },
   {
@@ -66,6 +71,7 @@ export const educationalModules: readonly EducationalModule[] = [
     slug: 'programacao-espreita-ataque',
     title: 'Programação C++ — Espreita vs. Ataque',
     colors: { fill: '#6a3fb5', onFill: '#ffffff', accent: '#6a3fb5', wire: '#6a3fb5' },
+    objectives: ['Programação C++ do robô', 'Máquina de estados Espreita e Ataque'],
     steps: pendingSteps(4),
   },
   {
@@ -73,6 +79,7 @@ export const educationalModules: readonly EducationalModule[] = [
     slug: 'desafio-quiz',
     title: 'Desafio & Quiz Interativo',
     colors: { fill: '#c2362f', onFill: '#ffffff', accent: '#c2362f', wire: '#c2362f' },
+    objectives: ['Desafios e quiz para avaliar o aprendizado'],
     steps: pendingSteps(5),
   },
 ]

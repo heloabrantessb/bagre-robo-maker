@@ -32,7 +32,7 @@ export function StepBar({ educationalModule, currentIndex, onNextStep }: StepBar
       )}
       {isLastStep && !nextModule && (
         <Link to="/" className={buttonClassName}>
-          Voltar à visão geral
+          Voltar ao início
         </Link>
       )}
     </div>

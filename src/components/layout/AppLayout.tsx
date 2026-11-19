@@ -1,6 +1,6 @@
 import { Fish } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { ModuleTrail } from '../modules/ModuleTrail.tsx'
 import { ScrollToTop } from './ScrollToTop.tsx'
 
@@ -17,6 +17,9 @@ function skipToMainContent(event: MouseEvent<HTMLAnchorElement>) {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
+  // Na página inicial o circuito da aula já mostra os módulos em ordem; a trilha do cabeçalho seria repetição.
+  const isHome = useLocation().pathname === '/'
+
   return (
     <div className="flex min-h-dvh flex-col">
       <ScrollToTop />
@@ -41,9 +44,11 @@ export function AppLayout({ children }: AppLayoutProps) {
             </span>
             <span className="font-display text-xl font-extrabold tracking-tight">Bagre Robô Maker</span>
           </Link>
-          <div className="min-w-0 flex-[1_1_20rem]">
-            <ModuleTrail />
-          </div>
+          {!isHome && (
+            <div className="min-w-0 flex-[1_1_20rem]">
+              <ModuleTrail />
+            </div>
+          )}
         </div>
       </header>
 
