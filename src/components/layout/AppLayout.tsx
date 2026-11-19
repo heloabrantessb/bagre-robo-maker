@@ -34,7 +34,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       </a>
 
       <header className="border-b border-hole bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-10 gap-y-3 px-4 py-3">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-10 gap-y-3 px-4 py-3">
           <Link
             to="/"
             className="flex items-center gap-2.5 rounded-lg text-ink focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-rail-minus"
