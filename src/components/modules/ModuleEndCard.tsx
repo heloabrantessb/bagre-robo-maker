@@ -51,7 +51,7 @@ export function ModuleEndCard({ educationalModule }: ModuleEndCardProps) {
           to="/"
           className="inline-flex min-h-13 items-center rounded-xl bg-white px-6 text-lg font-bold text-ink focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand-light"
         >
-          Voltar à visão geral
+          Voltar ao início
         </Link>
       )}
     </section>
