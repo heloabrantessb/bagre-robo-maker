@@ -44,7 +44,8 @@ src/
 ├── routes/            # definição das rotas
 ├── pages/             # uma página por rota
 ├── components/        # componentes compartilhados (layout/ e modules/)
-├── data/              # dados estáticos tipados (ex.: lista de módulos)
+├── hooks/             # hooks React (ex.: passo em leitura na página de módulo)
+├── data/              # dados estáticos tipados (módulos, cores e passos)
 ├── styles/            # CSS global com Tailwind CSS
 └── assets/            # imagens e recursos importados pelo código
 public/                # arquivos estáticos copiados sem processamento
@@ -59,7 +60,7 @@ A aplicação usa `HashRouter`, portanto as rotas ficam após `#` na URL (ex.: `
 |------|--------|
 | `#/` | Visão geral: apresentação, objetivos da aula e acesso aos módulos |
 | `#/modulos` | Lista dos cinco módulos |
-| `#/modulos/<slug>` | Página do módulo (provisória, sem conteúdo didático) |
+| `#/modulos/<slug>` | Página do módulo: barra lateral de passos e um título (h2) por passo; conteúdo didático ainda em preparação |
 | qualquer outra | Página não encontrada |
 
 Slugs dos módulos: `biomimetica-garrafa-pet`, `eletronica-transistor-c1815`, `sensor-ultrassonico-sonar`, `programacao-espreita-ataque` e `desafio-quiz` (definidos em `src/data/modules.ts`).
