@@ -13,7 +13,7 @@ export function ModuleTrail() {
         {educationalModules.map((educationalModule, index) => {
           const isCurrent = educationalModule.slug === currentSlug
           const isLast = index === educationalModules.length - 1
-          const { fill, onFill, accent } = educationalModule.colors
+          const { fill, onFill, wire } = educationalModule.colors
 
           return (
             <li key={educationalModule.id} className={`flex items-center ${isLast ? '' : 'flex-1'}`}>
@@ -25,8 +25,8 @@ export function ModuleTrail() {
                 className="flex size-11 shrink-0 items-center justify-center rounded-full border-[3px] font-display text-lg font-extrabold text-ink transition-transform hover:scale-105 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-rail-minus motion-reduce:transition-none"
                 style={
                   isCurrent
-                    ? { backgroundColor: fill, borderColor: fill, color: onFill, boxShadow: `0 0 0 3px #ffffff, 0 0 0 6px ${accent}` }
-                    : { backgroundColor: '#ffffff', borderColor: accent }
+                    ? { backgroundColor: fill, borderColor: fill, color: onFill, boxShadow: `0 0 0 3px #ffffff, 0 0 0 6px ${wire}` }
+                    : { backgroundColor: '#ffffff', borderColor: wire }
                 }
               >
                 {educationalModule.id}
@@ -35,7 +35,7 @@ export function ModuleTrail() {
                 <span
                   aria-hidden="true"
                   className="mx-1.5 h-1 min-w-3 flex-1 rounded-full"
-                  style={{ backgroundColor: accent }}
+                  style={{ backgroundColor: wire }}
                 />
               )}
             </li>
