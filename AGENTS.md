@@ -102,6 +102,7 @@ A distribuição de tempo entre os módulos dentro dos 90 minutos **ainda não f
 | Roteamento | React Router com **`HashRouter`** |
 | Estilos | Tailwind CSS |
 | Ícones | Lucide React |
+| Tipografia | Google Fonts: **Bricolage Grotesque** (títulos) e **Atkinson Hyperlegible Next** (texto), carregadas no `index.html`, sem pacote npm (desde a Issue #12) |
 | Realce de código C++ | Prism.js |
 | Gerenciador de pacotes | npm (com `package-lock.json` versionado) |
 | Análise estática | ESLint |
@@ -128,6 +129,7 @@ Complementos:
 - O `base` do Vite deve ser compatível com o subdiretório do GitHub Pages (`/bagre-robo-maker/`).
 - A validação local da aplicação compilada é feita com `npm run preview`; o `dist/index.html` não funciona aberto diretamente pelo sistema de arquivos.
 - Importar os ícones do Lucide React individualmente, para que apenas os usados entrem no pacote final.
+- Identidade visual "protoboard" (Issue #12): cada módulo tem cores próprias em `src/data/modules.ts` (`fill`, `onFill`, `accent` para textos com contraste de 4,5:1 e `wire` para jumpers e contornos decorativos). Fontes externas limitadas às duas famílias e aos pesos usados (RNF04).
 - Carregar no Prism.js apenas as linguagens necessárias (C++).
 - A publicação é feita pelo workflow `.github/workflows/deploy.yml`, apenas a partir da `main` (push ou disparo manual). O GitHub Pages precisa estar configurado com a origem "GitHub Actions"; a origem "Deploy from a branch" publica os arquivos sem build e o site fica em branco.
 - O Modo Aluno/Professor é apenas uma alternância de visualização no navegador — **não é** controle de acesso.
